@@ -12,6 +12,9 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.quanlyphongtro.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.shape.MaterialShapeDrawable;
 
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
@@ -24,6 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavView);
         frameLayout = findViewById(R.id.frameLayout);
+
+        // bo tròn các góc của thanh navigation
+        MaterialShapeDrawable shapeDrawable = (MaterialShapeDrawable) bottomNavigationView.getBackground();
+        shapeDrawable.setShapeAppearanceModel(
+                shapeDrawable.getShapeAppearanceModel()
+                        .toBuilder()
+                        .setTopLeftCorner(CornerFamily.ROUNDED, 100f)  // 100f là độ bo góc
+                        .setTopRightCorner(CornerFamily.ROUNDED, 100f)  // 100f là độ bo góc
+                        .build());
 
        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
 
@@ -56,5 +68,15 @@ public class MainActivity extends AppCompatActivity {
             fragmentTransaction.replace(R.id.frameLayout, fragment);
         }
         fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        if (fragmentManager.getBackStackEntryCount() > 0) {
+            fragmentManager.popBackStack(); // Quay lại fragment trước
+        } else {
+            super.onBackPressed(); // Nếu không còn fragment nào trong back stack, thoát ứng dụng
+        }
     }
 }

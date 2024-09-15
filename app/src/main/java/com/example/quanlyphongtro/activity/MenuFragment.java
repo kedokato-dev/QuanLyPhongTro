@@ -1,14 +1,15 @@
 package com.example.quanlyphongtro.activity;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyphongtro.Model.MenuItem;
 import com.example.quanlyphongtro.R;
@@ -29,6 +30,16 @@ public class MenuFragment extends Fragment {
         rcv_item = view.findViewById(R.id.rcv_item);
         itemMenuAdapter = new ItemMenuAdapter(getContext());
 
+        Toolbar toolbar = view.findViewById(R.id.app_bar_menu);
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        if (((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
+            ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+
+        // Bật tùy chọn menu cho Fragment
+        setHasOptionsMenu(true);
+
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);
         rcv_item.setLayoutManager(linearLayoutManager);
         itemMenuAdapter.setData(getListMenu());
@@ -40,7 +51,7 @@ public class MenuFragment extends Fragment {
             List<MenuItem> list = new ArrayList<>();
             list.add(new MenuItem(R.drawable.import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
             list.add(new MenuItem(R.drawable.export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
-
+            list.add(new MenuItem(R.drawable.users, "Thành viên", "Quản lý thành viên trong khu trọ"));
             return list;
         }
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="8dp">
+
+    <TextView
+        android:text="Tran Anh Quan"
+        android:fontFamily="@font/robotolight"
+        android:id="@+id/member_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:text="SĐT:"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/robotolight"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="80dp"/>
+
+    <TextView
+        android:text="0333241634"
+        android:id="@+id/member_phone"
+        android:fontFamily="@font/robotolight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:layout_marginStart="2dp"/>
+</LinearLayout>

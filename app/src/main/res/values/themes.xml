@@ -1,9 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.QuanLyPhongTRo" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.QuanLyPhongTRo" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:fontFamily">@font/robotolight</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.QuanLyPhongTRo" parent="Base.Theme.QuanLyPhongTRo" />
+    <style name="Theme.QuanLyPhongTRo" parent="Base.Theme.QuanLyPhongTRo">
+        <item name="android:fontFamily">@font/robotolight</item>
+    </style>
 </resources>

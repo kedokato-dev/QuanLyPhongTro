@@ -2,6 +2,7 @@ package com.example.quanlyphongtro.Model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Room",foreignKeys = @ForeignKey(entity = RoomType.class, parentColumns = "roomTypeId", childColumns = "roomTypeId"))

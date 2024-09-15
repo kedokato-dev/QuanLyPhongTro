@@ -2,6 +2,7 @@ package com.example.quanlyphongtro.Model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Index;
 
 @Entity(tableName = "Room_Tenant", primaryKeys = {"roomId", "tenantId"}, foreignKeys = {
     @ForeignKey(entity = Room.class, parentColumns = "roomId", childColumns = "roomId"),
@@ -18,6 +19,10 @@ public class Room_Tenant {
         this.tenantId = tenantId;
         this.startDate = startDate;
         this.endDate = endDate;
+    }
+
+    public Room_Tenant() {
+
     }
 
     public int getRoomId() {

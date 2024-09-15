@@ -12,6 +12,9 @@ public class Tenant {
     private String Email;
     private String identityCard;
 
+    public Tenant(){
+
+    }
     public Tenant(int tenantId, String fullName, String phone, String email, String identityCard) {
         this.tenantId = tenantId;
         this.fullName = fullName;

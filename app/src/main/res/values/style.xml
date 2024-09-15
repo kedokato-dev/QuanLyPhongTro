@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="RoundedBottomNavView" parent="">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.BottomNavigationView.Rounded</item>
+        <item name="android:fontFamily">@font/robotolight</item>
+    </style>
+
+    <style name="ShapeAppearance.BottomNavigationView.Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item> <!-- Điều chỉnh độ bo góc -->
+    </style>
+
+    <style name="toolbarText" parent="TextAppearance.MaterialComponents.Button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAllCaps">false</item>
+        
+    </style>
+    
+    <style name="QuanLyPhongTro.toolBar" parent="Widget.AppCompat.Toolbar">
+       <item name="android:background">@color/blue</item>
+        <item name="theme">@style/Base.Theme.QuanLyPhongTRo</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
+        <item name="titleTextAppearance">@style/toolbarText</item>
+
+
+
+    </style>
+</resources>

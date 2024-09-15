@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/boder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!-- Cụm tên phòng và số lượng người -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_room"
+            android:text="Phòng:"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_room_name"
+            android:fontFamily="@font/robotolight"
+            android:text="101 "
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <!-- Icon số người trong phòng -->
+        <ImageView
+            android:id="@+id/user_icon"
+            android:fontFamily="@font/robotolight"
+            android:src="@drawable/user_group"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="8dp"/>
+
+        <!-- Số người trong phòng -->
+        <TextView
+            android:id="@+id/tv_user_number"
+            android:fontFamily="@font/robotolight"
+            android:text="3"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <!-- Cụm trạng thái -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:fontFamily="@font/robotolight"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <!-- Trạng thái -->
+        <TextView
+            android:id="@+id/tv_status"
+            android:text="Trạng thái:"
+            android:layout_marginStart="20dp"
+            android:textSize="18sp"
+            android:fontFamily="@font/robotolight"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Nội dung trạng thái -->
+        <TextView
+            android:id="@+id/tv_room_status"
+            android:text="Đã đủ người"
+            android:fontFamily="@font/robotolight"
+            android:textSize="18sp"
+            android:textColor="#E91E63"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+</LinearLayout>

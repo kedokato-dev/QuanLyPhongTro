@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#FAF7F7"
     tools:context=".activity.MainActivity">
 
     <FrameLayout
@@ -15,13 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:background="#FFFFFF"
-            android:id="@+id/bottomNavView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
-            />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:background="#ffff"
+        android:elevation="8dp"
+        android:id="@+id/bottomNavView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_nav_menu"
+        app:itemIconTint="@color/bottom_nav_color_selector"
+        app:itemTextColor="@color/bottom_nav_color_selector"
+        app:itemActiveIndicatorStyle="@style/CustomActiveIndicator"
+        app:shapeAppearanceOverlay="@style/RoundedBottomNavView"
+        />
+
 
 </LinearLayout>

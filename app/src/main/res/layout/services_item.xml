@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/boder"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="10dp"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <!-- Cụm tên dịch vụ và biểu tượng -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:fontFamily="@font/robotolight"
+            android:id="@+id/tv_service"
+            android:text="Tên dịch vụ:"
+            android:textColor="@color/black"
+            android:layout_marginStart="20dp"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:fontFamily="@font/robotolight"
+            android:id="@+id/tv_service_name"
+            android:text="Internet "
+            android:layout_marginStart="8dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <!-- Icon sửa và xoá -->
+        <ImageView
+            android:id="@+id/update_icon"
+            android:src="@drawable/square_pen"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            app:tint="@color/green" />
+
+
+    </LinearLayout>
+
+    <!-- Cụm giá -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="10dp">
+
+        <!-- Giá -->
+        <TextView
+            android:fontFamily="@font/robotolight"
+            android:id="@+id/tv_label_price"
+            android:text="Giá tiền:"
+            android:layout_marginStart="20dp"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Nội dung giá -->
+        <TextView
+            android:fontFamily="@font/robotolight"
+            android:id="@+id/tv_service_price"
+            android:text="50000"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- VNĐ -->
+        <TextView
+            android:id="@+id/tv_vnd"
+            android:text="VNĐ"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_marginStart="8dp"
+            android:layout_width="wrap_content"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id="@+id/delete_icon"
+            android:src="@drawable/circle_minus"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="8dp"
+            app:tint="@color/red" />
+
+    </LinearLayout>
+</LinearLayout>
