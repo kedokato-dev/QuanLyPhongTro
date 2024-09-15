@@ -1,8 +1,8 @@
 package com.example.quanlyphongtro.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,6 +20,12 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ItemVi
 
     private Context mContext;
     private List<MenuItem> mlistMenu;
+    private OnItemClickListener onItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
+    }
+
 
     public ItemMenuAdapter(Context mContext) {
         this.mContext = mContext;
@@ -28,6 +34,10 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ItemVi
     public void setData(List<MenuItem> list){
         this.mlistMenu = list;
         notifyDataSetChanged(); // load và tải dữ liệu lên recycle view
+    }
+
+    public interface OnItemClickListener{
+        void onItemClik(int position);
     }
 
     @NonNull
@@ -39,14 +49,24 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ItemVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemViewHolder holder, @SuppressLint("RecyclerView") int position) {
         MenuItem menu = (MenuItem) mlistMenu.get(position);
         if(menu == null){
             return;
         }
+
         holder.imgItem.setImageResource(menu.getResourceId());
         holder.tv_menu.setText(menu.getNameMenu());
         holder.tv_sub_menu.setText(menu.getSubNameMenu());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              if(onItemClickListener != null){
+                  onItemClickListener.onItemClik(position);
+              }
+            }
+        });
     }
 
     @Override

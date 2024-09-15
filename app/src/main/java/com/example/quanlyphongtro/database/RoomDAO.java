@@ -7,6 +7,7 @@ import androidx.room.Query;
 import com.example.quanlyphongtro.Model.DetailRoomPOJO;
 import com.example.quanlyphongtro.Model.Room;
 import com.example.quanlyphongtro.Model.RoomWithTenantInfo;
+import com.example.quanlyphongtro.Model.UserDetailPOJO;
 
 import java.util.List;
 
@@ -26,4 +27,12 @@ public interface RoomDAO {
             "WHERE ROOM.roomNumber = :roomNumber \n" +
             "LIMIT 1;")
     List<DetailRoomPOJO> getDetailRoomPOJO(String roomNumber);
+
+    @Query("SELECT Tenant.fullName, Tenant.phone\n" +
+            "FROM Tenant \n" +
+            "INNER JOIN Room_Tenant ON Tenant.tenantId = Room_Tenant.tenantId \n" +
+            "INNER JOIN ROOM ON Room_Tenant.roomId = ROOM.roomId\n" +
+            "INNER JOIN RoomType ON ROOM.roomTypeId = RoomType.roomTypeId\n" +
+            "WHERE ROOM.roomNumber = :roomNumber")
+    List<UserDetailPOJO> getUserDetailRoom(String roomNumber);
 }

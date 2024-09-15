@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +45,18 @@ public class MenuFragment extends Fragment {
         rcv_item.setLayoutManager(linearLayoutManager);
         itemMenuAdapter.setData(getListMenu());
         rcv_item.setAdapter(itemMenuAdapter);
+
+        itemMenuAdapter.setOnItemClickListener(new ItemMenuAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClik(int position) {
+                if(position == 2){
+                    Intent intent = new Intent(getContext(), UserListActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+        });
+
         return view;
     }
 

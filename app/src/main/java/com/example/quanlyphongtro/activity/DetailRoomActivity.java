@@ -8,10 +8,13 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyphongtro.Model.DetailRoomPOJO;
+import com.example.quanlyphongtro.Model.UserDetailPOJO;
 import com.example.quanlyphongtro.R;
+import com.example.quanlyphongtro.adapter.ItemUserRoomAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
 
 import java.util.ArrayList;
@@ -29,35 +32,34 @@ public class DetailRoomActivity extends AppCompatActivity {
     private List<DetailRoomPOJO> detailRoom;
     private QuanLyPhongTroDB database;
     private String roomNumberValue;
+    private ItemUserRoomAdapter itemUserRoomAdapter;
+    private List<UserDetailPOJO> userDetailPOJOList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_room);
-
-        Toolbar toolbar = findViewById(R.id.app_bar_detail_room);
-        setSupportActionBar(toolbar);
-
-        // Hiển thị nút back
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        // Xóa title mặc định
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // Đổi icon nút back
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left); // Thay icon
+        loadToolBar();
 
         loadView();
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
+        rcv_item_userRoom.setLayoutManager(linearLayoutManager);
+        itemUserRoomAdapter = new ItemUserRoomAdapter(this);
 
          roomNumberValue = getIntent().getStringExtra("roomNumber");
 
         detailRoom = new ArrayList<>();
+        userDetailPOJOList = new ArrayList<>();
 
         database = QuanLyPhongTroDB.getInstance(this);
 
         detailRoom = database.roomDAO().getDetailRoomPOJO(roomNumberValue);
+        userDetailPOJOList = database.roomDAO().getUserDetailRoom(roomNumberValue);
+
+        itemUserRoomAdapter.setData(userDetailPOJOList);
+        rcv_item_userRoom.setAdapter(itemUserRoomAdapter);
 
         loadDataDetailRoom();
 
@@ -102,6 +104,21 @@ public class DetailRoomActivity extends AppCompatActivity {
             roomStatus.setText("Còn trống");
             roomStatus.setTextColor(this.getResources().getColor(R.color.green));
         }
+    }
+
+    private void loadToolBar(){
+        Toolbar toolbar = findViewById(R.id.app_bar_detail_room);
+        setSupportActionBar(toolbar);
+
+        // Hiển thị nút back
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        // Xóa title mặc định
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // Đổi icon nút back
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left); // Thay icon
     }
 
 
