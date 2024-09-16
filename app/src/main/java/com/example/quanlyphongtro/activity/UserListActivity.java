@@ -9,7 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.UserPOJO;
+import com.example.quanlyphongtro.model.UserPOJO;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemUserListAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;

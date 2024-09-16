@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.ServicePOJO;
+import com.example.quanlyphongtro.model.ServicePOJO;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemServiceAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;

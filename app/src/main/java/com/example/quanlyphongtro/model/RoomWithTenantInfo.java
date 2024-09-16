@@ -1,4 +1,4 @@
-package com.example.quanlyphongtro.Model;
+package com.example.quanlyphongtro.model;
 
 public class RoomWithTenantInfo {
     private String roomNumber;

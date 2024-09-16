@@ -1,8 +1,7 @@
-package com.example.quanlyphongtro.Model;
+package com.example.quanlyphongtro.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
-import androidx.room.Index;
 
 @Entity(tableName = "Room_Tenant", primaryKeys = {"roomId", "tenantId"}, foreignKeys = {
     @ForeignKey(entity = Room.class, parentColumns = "roomId", childColumns = "roomId"),

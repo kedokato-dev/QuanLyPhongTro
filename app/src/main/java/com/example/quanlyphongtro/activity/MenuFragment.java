@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.MenuItem;
+import com.example.quanlyphongtro.model.MenuItem;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemMenuAdapter;
 

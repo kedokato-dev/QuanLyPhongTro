@@ -1,4 +1,4 @@
-package com.example.quanlyphongtro.Model;
+package com.example.quanlyphongtro.model;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;

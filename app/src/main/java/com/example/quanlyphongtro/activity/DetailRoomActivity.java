@@ -11,8 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.DetailRoomPOJO;
-import com.example.quanlyphongtro.Model.UserDetailPOJO;
+import com.example.quanlyphongtro.model.DetailRoomPOJO;
+import com.example.quanlyphongtro.model.UserDetailPOJO;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemUserRoomAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;

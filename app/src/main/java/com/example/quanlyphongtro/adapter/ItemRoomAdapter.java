@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.RoomWithTenantInfo;
+import com.example.quanlyphongtro.model.RoomWithTenantInfo;
 import com.example.quanlyphongtro.R;
 
 import java.util.List;

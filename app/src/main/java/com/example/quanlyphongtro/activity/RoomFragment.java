@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.RoomWithTenantInfo;
+import com.example.quanlyphongtro.model.RoomWithTenantInfo;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemRoomAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;

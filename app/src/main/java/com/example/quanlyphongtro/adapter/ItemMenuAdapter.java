@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.MenuItem;
+import com.example.quanlyphongtro.model.MenuItem;
 import com.example.quanlyphongtro.R;
 
 import java.util.List;

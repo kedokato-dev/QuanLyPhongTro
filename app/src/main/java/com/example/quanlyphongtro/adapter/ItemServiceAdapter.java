@@ -11,10 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.Model.Service;
-import com.example.quanlyphongtro.Model.ServicePOJO;
+import com.example.quanlyphongtro.model.ServicePOJO;
 import com.example.quanlyphongtro.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 import java.util.Locale;

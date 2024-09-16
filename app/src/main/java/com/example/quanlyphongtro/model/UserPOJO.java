@@ -1,34 +1,19 @@
-package com.example.quanlyphongtro.Model;
+package com.example.quanlyphongtro.model;
 
-import androidx.room.Entity;
-import androidx.room.PrimaryKey;
-
-@Entity(tableName = "Tenant")
-public class Tenant {
-    @PrimaryKey(autoGenerate = true)
-    private int tenantId;
+public class UserPOJO {
     private String fullName;
     private String phone;
     private String Email;
     private String identityCard;
 
-    public Tenant(){
-
-    }
-    public Tenant(int tenantId, String fullName, String phone, String email, String identityCard) {
-        this.tenantId = tenantId;
+    public UserPOJO(String fullName, String phone, String email, String identityCard) {
         this.fullName = fullName;
         this.phone = phone;
-        Email = email;
+        this.Email = email;
         this.identityCard = identityCard;
     }
 
-    public int getTenantId() {
-        return tenantId;
-    }
-
-    public void setTenantId(int tenantId) {
-        this.tenantId = tenantId;
+    public UserPOJO() {
     }
 
     public String getFullName() {
@@ -52,7 +37,7 @@ public class Tenant {
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.Email = email;
     }
 
     public String getIdentityCard() {

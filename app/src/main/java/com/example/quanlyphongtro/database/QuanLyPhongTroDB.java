@@ -7,13 +7,13 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.quanlyphongtro.Model.Bill;
-import com.example.quanlyphongtro.Model.BillDetail;
-import com.example.quanlyphongtro.Model.Room;
-import com.example.quanlyphongtro.Model.RoomType;
-import com.example.quanlyphongtro.Model.Room_Tenant;
-import com.example.quanlyphongtro.Model.Service;
-import com.example.quanlyphongtro.Model.Tenant;
+import com.example.quanlyphongtro.model.Bill;
+import com.example.quanlyphongtro.model.BillDetail;
+import com.example.quanlyphongtro.model.Room;
+import com.example.quanlyphongtro.model.RoomType;
+import com.example.quanlyphongtro.model.Room_Tenant;
+import com.example.quanlyphongtro.model.Service;
+import com.example.quanlyphongtro.model.Tenant;
 
 
 @Database(entities = {Room.class, RoomType.class, Room_Tenant.class, Service.class, Bill.class, BillDetail.class, Tenant.class}, version = 1)
@@ -35,6 +35,7 @@ import com.example.quanlyphongtro.Model.Tenant;
         public abstract ServiceDAO serviceDAO();
 
         public abstract UserDAO userDAO();
+        public abstract BillDAO billDAO();
 
     // Callback để chạy SQL trigger khi database được tạo hoặc mở
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {

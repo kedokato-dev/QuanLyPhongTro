@@ -4,10 +4,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.quanlyphongtro.Model.DetailRoomPOJO;
-import com.example.quanlyphongtro.Model.Room;
-import com.example.quanlyphongtro.Model.RoomWithTenantInfo;
-import com.example.quanlyphongtro.Model.UserDetailPOJO;
+import com.example.quanlyphongtro.model.DetailRoomPOJO;
+import com.example.quanlyphongtro.model.Room;
+import com.example.quanlyphongtro.model.RoomWithTenantInfo;
+import com.example.quanlyphongtro.model.RoomNumber_RoomTypeName;
+import com.example.quanlyphongtro.model.UserDetailPOJO;
 
 import java.util.List;
 
@@ -35,4 +36,10 @@ public interface RoomDAO {
             "INNER JOIN RoomType ON ROOM.roomTypeId = RoomType.roomTypeId\n" +
             "WHERE ROOM.roomNumber = :roomNumber")
     List<UserDetailPOJO> getUserDetailRoom(String roomNumber);
+
+    @Query("SELECT RoomType.typeName, ROOM.price \n" +
+            "FROM ROOM\n" +
+            "INNER JOIN RoomType ON ROOM.roomTypeId = RoomType.roomTypeId\n" +
+            "WHERE ROOM.roomNumber = :roomNumber")
+    List<RoomNumber_RoomTypeName> getRoomNumber_RoomTypeName(String roomNumber);
 }

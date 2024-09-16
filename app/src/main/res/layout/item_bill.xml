@@ -25,7 +25,7 @@
 
             <TextView
                 android:fontFamily="@font/robotolight"
-                android:text="Họ tên:"
+                android:text="Phòng:"
                 android:textColor="@color/black"
                 android:layout_marginStart="20dp"
                 android:textSize="20sp"
@@ -33,42 +33,42 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:layout_weight="1"
-                android:gravity="center"
                 android:fontFamily="@font/robotolight"
-                android:id="@+id/tv_full_name"
-                android:text="Trần Anh Quân"
+                android:id="@+id/tv_room_number"
+                android:text="101"
+                android:gravity="center"
                 android:textColor="@color/black"
                 android:layout_marginStart="2dp"
                 android:textSize="20sp"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
         </LinearLayout>
 
-       <LinearLayout
-           android:orientation="horizontal"
-           android:layout_weight="0.3"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content">
-           <!-- Icon sửa và xoá -->
-           <ImageView
-               android:id="@+id/update_icon"
-               android:src="@drawable/square_pen"
-               android:layout_width="30dp"
-               android:layout_height="30dp"
-               android:layout_marginEnd="8dp"
-               app:tint="@color/green"
-               android:layout_weight="1"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_weight="0.3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <!-- Icon sửa và xoá -->
+            <ImageView
+                android:id="@+id/update_icon"
+                android:src="@drawable/square_pen"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                app:tint="@color/green"
+                android:layout_weight="1"/>
 
-           <ImageView
-               android:id="@+id/delete_icon"
-               android:src="@drawable/circle_minus"
-               android:layout_width="30dp"
-               android:layout_height="30dp"
-               android:layout_marginEnd="8dp"
-               app:tint="@color/red"
-               android:layout_weight="1"/>
-       </LinearLayout>
+            <ImageView
+                android:id="@+id/delete_icon"
+                android:src="@drawable/circle_minus"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="8dp"
+                app:tint="@color/red"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
 
     </LinearLayout>
@@ -77,11 +77,12 @@
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:fontFamily="@font/robotolight"
-            android:text="SĐT: "
+            android:text="Ngày lập hóa đơn:"
             android:layout_marginStart="20dp"
             android:textColor="@color/black"
             android:textSize="20sp"
@@ -89,18 +90,18 @@
             android:layout_height="wrap_content" />
 
         <TextView
-            android:id="@+id/tv_phone"
-            android:layout_weight="1"
+            android:fontFamily="@font/robotolight"
+            android:id="@+id/tv_issue_date"
+            android:text="10/07/2004"
             android:gravity="center"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/black"
+            android:textSize="20sp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:fontFamily="@font/robotolight"
-            android:text="0333241634 "
-            android:textColor="@color/black"
-            android:textSize="20sp" />
-
+            android:layout_weight="1"/>
     </LinearLayout>
+
 
     <!-- Email -->
     <LinearLayout
@@ -112,7 +113,7 @@
 
         <TextView
             android:fontFamily="@font/robotolight"
-            android:text="Email:"
+            android:text="Tổng tiền:"
             android:layout_marginStart="20dp"
             android:textSize="20sp"
             android:textColor="@color/black"
@@ -122,15 +123,25 @@
 
         <TextView
             android:fontFamily="@font/robotolight"
-            android:id="@+id/tv_email"
-            android:layout_weight="1"
+            android:id="@+id/tv_total_price"
+            android:text="4.000.000"
             android:gravity="center"
-            android:text="anhquan@gmail.com"
             android:layout_marginStart="2dp"
             android:textSize="20sp"
             android:textColor="@color/black"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:fontFamily="@font/robotolight"
+            android:text="VNĐ"
+            android:layout_marginStart="2dp"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
 
     </LinearLayout>
     <!--CCCD-->
@@ -140,7 +151,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Số CCCD:"
+            android:text="Trạng thái:"
             android:fontFamily="@font/robotolight"
             android:layout_marginStart="20dp"
             android:textSize="20sp"
@@ -149,14 +160,14 @@
             android:layout_height="wrap_content"/>
 
         <TextView
-            android:id="@+id/tv_identity_card"
-            android:text="025204013481"
+            android:id="@+id/tv_status_bill"
+            android:text="Chưa thanh toán"
             android:layout_weight="1"
             android:gravity="center"
             android:fontFamily="@font/robotolight"
             android:layout_marginStart="2dp"
             android:textSize="20sp"
-            android:textColor="@color/black"
+            android:textColor="@color/red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
