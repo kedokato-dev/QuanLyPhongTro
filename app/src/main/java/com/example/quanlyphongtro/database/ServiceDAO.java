@@ -1,6 +1,7 @@
 package com.example.quanlyphongtro.database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -14,6 +15,11 @@ import java.util.List;
 public interface ServiceDAO {
     @Insert
     void insertService(Service service);
+    @Delete
+    void delete(Service service);
+
+    @Query("SELECT * FROM service WHERE serviceName = :serviceName AND pricePerUnit = :servicePrice")
+    Service getServiceByNameAndPrice(String serviceName, double servicePrice);
     @Query("SELECT serviceName, pricePerUnit FROM SERVICE")
     List<ServicePOJO> getListService();
 

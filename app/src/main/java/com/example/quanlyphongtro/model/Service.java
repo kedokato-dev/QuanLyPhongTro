@@ -16,6 +16,15 @@ public class Service {
         this.pricePerUnit = pricePerUnit;
     }
 
+    public Service(String serviceName, double pricePerUnit) {
+        this.serviceName = serviceName;
+        this.pricePerUnit = pricePerUnit;
+    }
+
+    public Service() {
+
+    }
+
     public int getServiceId() {
         return serviceId;
     }

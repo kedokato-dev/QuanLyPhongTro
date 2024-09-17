@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.icu.text.NumberFormat;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
 
    private Context context;
    private List<ServicePOJO> serviceList;
-
+   private OnClickItemListener onClickItemListener;
 
 
     public ItemServiceAdapter(Context context) {
@@ -33,6 +34,21 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
         notifyDataSetChanged();
     }
 
+    public interface OnClickItemListener{
+        void onItemClick(int position);
+    }
+
+    public void setOnClickListener(OnClickItemListener onClickItemListener) {
+        this.onClickItemListener = onClickItemListener;
+    }
+
+    public void removeItem(int position) {
+        if (position >= 0 && position < serviceList.size()) {
+            serviceList.remove(position);
+            notifyItemRemoved(position);
+        }
+    }
+
 
     @NonNull
     @Override
@@ -42,7 +58,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ItemServicesViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ItemServicesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ServicePOJO service = serviceList.get(position);
         if(service == null){
             return;
@@ -52,6 +68,15 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
         String formattedPrice = numberFormat.format(service.getPricePerUnit());
         holder.serviceName.setText(service.getServiceName());
         holder.servicePrice.setText(formattedPrice);
+
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onClickItemListener != null){
+                    onClickItemListener.onItemClick(position);
+                }
+            }
+        });
     }
 
     @Override
