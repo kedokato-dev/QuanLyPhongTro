@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.model.UserDetailPOJO;
+import com.example.quanlyphongtro.pojo.UserDetailPOJO;
 import com.example.quanlyphongtro.R;
 
 import java.util.List;

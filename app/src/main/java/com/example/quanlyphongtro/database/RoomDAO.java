@@ -4,11 +4,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.example.quanlyphongtro.model.DetailRoomPOJO;
+import com.example.quanlyphongtro.pojo.DetailRoomPOJO;
 import com.example.quanlyphongtro.model.Room;
-import com.example.quanlyphongtro.model.RoomWithTenantInfo;
-import com.example.quanlyphongtro.model.RoomNumber_RoomTypeName;
-import com.example.quanlyphongtro.model.UserDetailPOJO;
+import com.example.quanlyphongtro.pojo.RoomWithTenantInfo;
+import com.example.quanlyphongtro.pojo.RoomNumber_RoomTypeName;
+import com.example.quanlyphongtro.pojo.UserDetailPOJO;
 
 import java.util.List;
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/boder"
+    android:background="@drawable/shape_color_white_outline_gray"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
@@ -40,7 +40,7 @@
         <ImageView
             android:id="@+id/user_icon"
             android:fontFamily="@font/robotolight"
-            android:src="@drawable/user_group"
+            android:src="@drawable/ic_user_group"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="8dp"/>

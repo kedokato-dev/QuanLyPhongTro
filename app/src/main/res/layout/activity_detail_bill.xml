@@ -4,6 +4,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/SCREEN"
     tools:context=".activity.DetailRoomActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,6 +20,7 @@
 
             <TextView
                 android:id="@+id/toolbar_room"
+                style="@style/TEXT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -45,6 +47,7 @@
             <TextView
                 android:fontFamily="@font/robotolight"
                 android:text="Tên phòng:"
+                style="@style/TEXT"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
                 android:textColor="@color/black"
@@ -53,6 +56,7 @@
 
             <TextView
                 android:text="hello"
+                style="@style/TEXT"
                 android:fontFamily="@font/robotolight"
                 android:id="@+id/tv_room_number_bill_detail"
                 android:textSize="18sp"
@@ -71,6 +75,7 @@
             <TextView
                 android:fontFamily="@font/robotolight"
                 android:text="Loại phòng:"
+                style="@style/TEXT"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
                 android:textColor="@color/black"
@@ -79,6 +84,7 @@
 
             <TextView
                 android:text="Phòng cao cấp"
+                style="@style/TEXT"
                 android:fontFamily="@font/robotolight"
                 android:id="@+id/tv_room_type_bill_detail"
                 android:textSize="18sp"
@@ -97,6 +103,7 @@
             <TextView
                 android:fontFamily="@font/robotolight"
                 android:text="Ngày lập hóa đơn:"
+                style="@style/TEXT"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
                 android:textColor="@color/black"
@@ -108,7 +115,7 @@
                 android:fontFamily="@font/robotolight"
                 android:id="@+id/tv_issue_date_bill_detail"
                 android:textSize="18sp"
-
+                style="@style/TEXT"
                 android:layout_marginStart="8dp"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
@@ -124,6 +131,7 @@
             <TextView
                 android:text="Giá phòng:"
                 android:fontFamily="@font/robotolight"
+                style="@style/TEXT"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
                 android:textColor="@color/black"
@@ -132,6 +140,7 @@
 
             <TextView
                 android:text="2.000.000"
+                style="@style/TEXT"
                 android:fontFamily="@font/robotolight"
                 android:id="@+id/tv_room_price_bill_detail"
                 android:textSize="18sp"
@@ -143,6 +152,7 @@
             <TextView
                 android:text="VNĐ"
                 android:fontFamily="@font/robotolight"
+                style="@style/TEXT"
                 android:textSize="18sp"
                 android:layout_marginStart="2dp"
                 android:textColor="@color/black"
@@ -154,6 +164,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="20dp"
             android:text="Danh sách dịch vụ đã sử dụng:"
+            style="@style/TEXT"
             android:fontFamily="@font/robotolight"
             android:textSize="20sp"
             android:textColor="@color/black"
@@ -165,6 +176,7 @@
             android:fontFamily="@font/robotolight"
             android:layout_marginStart="10dp"
             android:layout_marginBottom="10dp"
+            style="@style/TEXT"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"/>
@@ -179,6 +191,7 @@
                 android:fontFamily="@font/robotolight"
                 android:textSize="18sp"
                 android:layout_marginStart="20dp"
+                style="@style/TEXT"
                 android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
@@ -186,6 +199,7 @@
             <TextView
                 android:text="8.888.888"
                 android:fontFamily="@font/robotolight"
+                style="@style/TEXT"
                 android:id="@+id/tv_total_service_amonut"
                 android:textSize="18sp"
                 android:layout_marginStart="8dp"
@@ -196,6 +210,7 @@
             <TextView
                 android:text="VNĐ"
                 android:fontFamily="@font/robotolight"
+                style="@style/TEXT"
                 android:textSize="18sp"
                 android:layout_marginStart="2dp"
                 android:textColor="@color/black"
@@ -219,6 +234,7 @@
 
         <TextView
             android:text="Thành tiền:"
+            style="@style/TEXT"
             android:fontFamily="@font/robotolight"
             android:textSize="20sp"
             android:layout_marginStart="22dp"
@@ -228,6 +244,7 @@
 
         <TextView
             android:text="9.999.999"
+            style="@style/TEXT"
             android:fontFamily="@font/robotolight"
             android:id="@+id/tv_total_amount"
             android:textSize="18sp"
@@ -238,6 +255,7 @@
 
         <TextView
             android:text="VNĐ"
+            style="@style/TEXT"
             android:fontFamily="@font/robotolight"
             android:textSize="18sp"
             android:layout_marginStart="2dp"
@@ -253,6 +271,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:text="Trạng thái:"
+            style="@style/TEXT"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:layout_width="wrap_content"
@@ -260,6 +279,7 @@
 
         <TextView
             android:id="@+id/tv_status_bill_detail"
+            style="@style/TEXT"
             android:text="Chưa thanh toán"
             android:layout_marginStart="2dp"
             android:textColor="@color/black"

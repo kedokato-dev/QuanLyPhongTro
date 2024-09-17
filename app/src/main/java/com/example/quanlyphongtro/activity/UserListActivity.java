@@ -9,7 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.model.UserPOJO;
+import com.example.quanlyphongtro.pojo.UserPOJO;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemUserListAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
@@ -72,7 +72,7 @@ public class UserListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Đổi icon nút back
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left); // Thay icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_left); // Thay icon
     }
 
     // Xử lý sự kiện khi người dùng nhấn nút back trên toolbar

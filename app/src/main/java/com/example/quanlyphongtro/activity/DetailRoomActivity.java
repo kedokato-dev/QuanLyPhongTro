@@ -11,8 +11,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.model.DetailRoomPOJO;
-import com.example.quanlyphongtro.model.UserDetailPOJO;
+import com.example.quanlyphongtro.pojo.DetailRoomPOJO;
+import com.example.quanlyphongtro.pojo.UserDetailPOJO;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemUserRoomAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
@@ -118,7 +118,7 @@ public class DetailRoomActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Đổi icon nút back
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left); // Thay icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_left); // Thay icon
     }
 
 

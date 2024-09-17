@@ -5,8 +5,8 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.example.quanlyphongtro.model.Service;
-import com.example.quanlyphongtro.model.ServiceInBillPOJO;
-import com.example.quanlyphongtro.model.ServicePOJO;
+import com.example.quanlyphongtro.pojo.ServiceInBillPOJO;
+import com.example.quanlyphongtro.pojo.ServicePOJO;
 
 import java.util.List;
 

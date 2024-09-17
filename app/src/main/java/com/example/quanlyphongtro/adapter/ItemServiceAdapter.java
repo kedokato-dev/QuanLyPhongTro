@@ -11,7 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.model.ServicePOJO;
+import com.example.quanlyphongtro.pojo.ServicePOJO;
 import com.example.quanlyphongtro.R;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
     @NonNull
     @Override
     public ItemServicesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.services_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_service, parent, false);
         return new ItemServicesViewHolder(view);
     }
 

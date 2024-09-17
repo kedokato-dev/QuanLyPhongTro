@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemServiceBillAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
-import com.example.quanlyphongtro.model.ItemBillPOJO;
-import com.example.quanlyphongtro.model.RoomNumber_RoomTypeName;
-import com.example.quanlyphongtro.model.ServiceInBillPOJO;
+import com.example.quanlyphongtro.pojo.ItemBillPOJO;
+import com.example.quanlyphongtro.pojo.RoomNumber_RoomTypeName;
+import com.example.quanlyphongtro.pojo.ServiceInBillPOJO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +42,7 @@ public class DetailBillActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_bill);
 
@@ -65,10 +66,9 @@ public class DetailBillActivity extends AppCompatActivity {
 
         itemServiceBillAdapter.setData(listService);
         rcv_item_service_in_bill.setAdapter(itemServiceBillAdapter);
+
         loadView();
         loadDetailBill();
-
-
     }
 
 
@@ -85,7 +85,7 @@ public class DetailBillActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Đổi icon nút back
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.arrow_left); // Thay icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_left); // Thay icon
     }
 
     // Xử lý sự kiện khi người dùng nhấn nút back trên toolbar

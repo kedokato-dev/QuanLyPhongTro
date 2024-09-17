@@ -1,0 +1,13 @@
+<!-- res/drawable/border_2.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#1FAEEF" /> <!-- Màu nền xám nhạt -->
+    <stroke
+        android:width="2dp"
+        android:color="#FF5722"/> <!-- Viền dày 2dp màu cam -->
+    <corners android:radius="8dp"/> <!-- Bo tròn ít hơn với 8dp -->
+    <padding
+        android:left="12dp"
+        android:top="12dp"
+        android:right="12dp"
+        android:bottom="12dp" /> <!-- Padding lớn hơn -->
+</shape>

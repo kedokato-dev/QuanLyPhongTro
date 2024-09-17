@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.model.RoomWithTenantInfo;
+import com.example.quanlyphongtro.pojo.RoomWithTenantInfo;
 import com.example.quanlyphongtro.R;
 
 import java.util.List;
@@ -45,7 +45,7 @@ public class ItemRoomAdapter extends RecyclerView.Adapter<ItemRoomAdapter.ItemRo
     @NonNull
     @Override
     public ItemRoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.room_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_room, parent, false);
         return new ItemRoomViewHolder(view);
     }
 

@@ -1,4 +1,4 @@
-package com.example.quanlyphongtro.model;
+package com.example.quanlyphongtro.pojo;
 
 public class ItemBillPOJO {
     private String roomNumber;

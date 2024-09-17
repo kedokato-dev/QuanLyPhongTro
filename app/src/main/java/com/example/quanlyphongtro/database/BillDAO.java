@@ -3,7 +3,7 @@ package com.example.quanlyphongtro.database;
 import androidx.room.Dao;
 import androidx.room.Query;
 
-import com.example.quanlyphongtro.model.ItemBillPOJO;
+import com.example.quanlyphongtro.pojo.ItemBillPOJO;
 
 import java.util.List;
 

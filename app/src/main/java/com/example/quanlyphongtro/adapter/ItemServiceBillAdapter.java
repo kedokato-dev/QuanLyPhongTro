@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyphongtro.R;
-import com.example.quanlyphongtro.model.ServiceInBillPOJO;
+import com.example.quanlyphongtro.pojo.ServiceInBillPOJO;
 
 import java.util.List;
 import java.util.Locale;

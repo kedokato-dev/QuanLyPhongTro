@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.model.MenuItem;
+import com.example.quanlyphongtro.pojo.MenuItem;
 import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemMenuAdapter;
 
@@ -62,9 +62,10 @@ public class MenuFragment extends Fragment {
 
     private List<MenuItem> getListMenu() {
             List<MenuItem> list = new ArrayList<>();
-            list.add(new MenuItem(R.drawable.import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
-            list.add(new MenuItem(R.drawable.export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
-            list.add(new MenuItem(R.drawable.users, "Thành viên", "Quản lý thành viên trong khu trọ"));
+            list.add(new MenuItem(R.drawable.ic_import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
+            list.add(new MenuItem(R.drawable.ic_export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
+            list.add(new MenuItem(R.drawable.ic_users, "Thành viên", "Quản lý thành viên trong khu trọ"));
+            list.add(new MenuItem(R.drawable.ic_dark, "Dark mode", "Chế độ tối của ứng dụng"));
             return list;
         }
 
