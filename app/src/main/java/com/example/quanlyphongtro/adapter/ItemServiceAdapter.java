@@ -18,29 +18,41 @@ import com.example.quanlyphongtro.R;
 import java.util.List;
 import java.util.Locale;
 
-public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.ItemServicesViewHolder>{
+public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.ItemServicesViewHolder> {
 
-   private Context context;
-   private List<ServicePOJO> serviceList;
-   private OnClickItemListener onClickItemListener;
+    private Context context;
+    private List<ServicePOJO> serviceList;
+
+    private OnDeleteClickListener onDeleteClickListener;
+    private OnUpdateClickListener onUpdateClickListener;
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(int position);
+    }
+
+    public interface OnUpdateClickListener {
+        void onUpdateClick(int position);
+    }
+
+
+    public void setOnDeleteClickListener(OnDeleteClickListener listener) {
+        this.onDeleteClickListener = listener;
+    }
+
+    public void setOnUpdateClickListener(OnUpdateClickListener listener) {
+        this.onUpdateClickListener = listener;
+    }
 
 
     public ItemServiceAdapter(Context context) {
         this.context = context;
     }
 
-    public void setData(List<ServicePOJO> list){
+    public void setData(List<ServicePOJO> list) {
         this.serviceList = list;
         notifyDataSetChanged();
     }
 
-    public interface OnClickItemListener{
-        void onItemClick(int position);
-    }
-
-    public void setOnClickListener(OnClickItemListener onClickItemListener) {
-        this.onClickItemListener = onClickItemListener;
-    }
 
     public void removeItem(int position) {
         if (position >= 0 && position < serviceList.size()) {
@@ -60,7 +72,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
     @Override
     public void onBindViewHolder(@NonNull ItemServicesViewHolder holder, @SuppressLint("RecyclerView") int position) {
         ServicePOJO service = serviceList.get(position);
-        if(service == null){
+        if (service == null) {
             return;
         }
 
@@ -72,8 +84,17 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(onClickItemListener != null){
-                    onClickItemListener.onItemClick(position);
+                if (onDeleteClickListener != null) {
+                    onDeleteClickListener.onDeleteClick(position);
+                }
+            }
+        });
+
+        holder.imgUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onDeleteClickListener != null) {
+                    onUpdateClickListener.onUpdateClick(position);
                 }
             }
         });
@@ -81,7 +102,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
 
     @Override
     public int getItemCount() {
-        if(serviceList != null){
+        if (serviceList != null) {
             return serviceList.size();
         }
         return 0;
@@ -94,6 +115,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
 
         private ImageView imgDelete;
         private ImageView imgUpdate;
+
         public ItemServicesViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -103,7 +125,6 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
             imgUpdate = itemView.findViewById(R.id.update_icon);
         }
     }
-
 
 
 }

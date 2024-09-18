@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.quanlyphongtro.model.Service;
 import com.example.quanlyphongtro.pojo.ServiceInBillPOJO;
@@ -17,6 +18,8 @@ public interface ServiceDAO {
     void insertService(Service service);
     @Delete
     void delete(Service service);
+    @Update
+    void update(Service service);
 
     @Query("SELECT * FROM service WHERE serviceName = :serviceName AND pricePerUnit = :servicePrice")
     Service getServiceByNameAndPrice(String serviceName, double servicePrice);
