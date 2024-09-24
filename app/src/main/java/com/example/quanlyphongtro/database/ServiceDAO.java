@@ -18,6 +18,9 @@ public interface ServiceDAO {
     void insertService(Service service);
     @Delete
     void delete(Service service);
+
+    @Query("DELETE FROM SERVICE")
+    void deleteAllData();
     @Update
     void update(Service service);
 

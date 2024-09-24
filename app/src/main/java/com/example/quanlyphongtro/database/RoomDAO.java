@@ -19,6 +19,8 @@ public interface RoomDAO {
     @Query("SELECT R.roomNumber, R.status, COUNT(RT.tenantId) AS userNumber From Room AS R LEFT JOIN ROOM_TENANT AS RT ON R.roomId = RT.roomId \n" +
             "GROUP BY R.roomNumber, R.status")
     List<RoomWithTenantInfo> getRoomWithTenantInfo();
+    @Query("DELETE FROM ROOM")
+    void deleteAllData();
 
     @Query("SELECT ROOM.roomNumber, ROOM.status, ROOM.price, RoomType.typeName, RoomType.description\n" +
             "FROM Tenant \n" +
@@ -28,6 +30,9 @@ public interface RoomDAO {
             "WHERE ROOM.roomNumber = :roomNumber \n" +
             "LIMIT 1;")
     List<DetailRoomPOJO> getDetailRoomPOJO(String roomNumber);
+
+    @Query("SELECT * FROM ROOM")
+    List<Room> getAllRoom();
 
     @Query("SELECT Tenant.fullName, Tenant.phone\n" +
             "FROM Tenant \n" +

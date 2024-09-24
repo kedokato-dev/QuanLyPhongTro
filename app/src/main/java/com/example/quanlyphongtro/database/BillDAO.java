@@ -10,6 +10,9 @@ import java.util.List;
 @Dao
 public interface BillDAO
 {
+    @Query("DELETE FROM BILL")
+    void deleteAllData();
+
     @Query("SELECT ROOM.roomNumber,strftime('%d/%m/%Y', BILL.issueDate) AS issueDate,\n" +
             "SUM(BillDetail.amount) + ROOM.price AS totalAmount,  Bill.status\n" +
             "FROM Room\n" +

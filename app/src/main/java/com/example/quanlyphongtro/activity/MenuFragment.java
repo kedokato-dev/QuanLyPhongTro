@@ -46,11 +46,17 @@ public class MenuFragment extends Fragment {
         itemMenuAdapter.setData(getListMenu());
         rcv_item.setAdapter(itemMenuAdapter);
 
-        itemMenuAdapter.setOnItemClickListener(new ItemMenuAdapter.OnItemClickListener() {
+        itemMenuAdapter.setOnItemClickListener(new ItemMenuAdapter.OnItemClickGetUserListListener() {
             @Override
-            public void onItemClik(int position) {
+            public void onItemClick(int position) {
                 if(position == 2){
                     Intent intent = new Intent(getContext(), UserListActivity.class);
+                    startActivity(intent);
+                }else if(position == 0){
+                    Intent intent = new Intent(getContext(), ImportDataActivity.class);
+                    startActivity(intent);
+                }else if(position == 1){
+                    Intent intent = new Intent(getContext(), ExportDataActivity.class);
                     startActivity(intent);
                 }
 

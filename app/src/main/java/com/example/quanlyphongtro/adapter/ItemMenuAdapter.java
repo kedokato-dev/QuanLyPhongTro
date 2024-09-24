@@ -20,11 +20,14 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ItemVi
 
     private Context mContext;
     private List<MenuItem> mlistMenu;
-    private OnItemClickListener onItemClickListener;
+    private OnItemClickGetUserListListener onItemClickGetUserListListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
+
+
+    public void setOnItemClickListener(OnItemClickGetUserListListener listener) {
+        this.onItemClickGetUserListListener = listener;
     }
+
 
 
     public ItemMenuAdapter(Context mContext) {
@@ -36,9 +39,10 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ItemVi
         notifyDataSetChanged(); // load và tải dữ liệu lên recycle view
     }
 
-    public interface OnItemClickListener{
-        void onItemClik(int position);
+    public interface OnItemClickGetUserListListener{
+        void onItemClick(int position);
     }
+
 
     @NonNull
     @Override
@@ -62,8 +66,8 @@ public class ItemMenuAdapter extends RecyclerView.Adapter<ItemMenuAdapter.ItemVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-              if(onItemClickListener != null){
-                  onItemClickListener.onItemClik(position);
+              if(onItemClickGetUserListListener != null){
+                  onItemClickGetUserListListener.onItemClick(position);
               }
             }
         });

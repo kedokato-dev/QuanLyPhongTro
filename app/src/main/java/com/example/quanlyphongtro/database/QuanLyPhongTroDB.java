@@ -36,6 +36,10 @@ import com.example.quanlyphongtro.model.Tenant;
 
         public abstract UserDAO userDAO();
         public abstract BillDAO billDAO();
+        public abstract  Room_TenantDAO roomTenantDAO();
+        public abstract BillDetailDAO billDetailDAO();
+        public abstract RoomTypeDAO roomTypeDAO();
+
 
     // Callback để chạy SQL trigger khi database được tạo hoặc mở
     private static RoomDatabase.Callback roomCallback = new RoomDatabase.Callback() {

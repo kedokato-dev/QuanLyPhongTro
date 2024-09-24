@@ -53,6 +53,8 @@ public class HomeFragment extends Fragment {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
 
+
+
         // Bật tùy chọn menu cho Fragment
         setHasOptionsMenu(true);
 
@@ -95,6 +97,7 @@ public class HomeFragment extends Fragment {
         });
         return rootView;
     }
+
 
     private Dialog createDialog(int layoutResId, int gravity) {
         Dialog dialog = new Dialog(getContext());
