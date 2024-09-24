@@ -1,8 +1,10 @@
 package com.example.quanlyphongtro.database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.quanlyphongtro.pojo.DetailRoomPOJO;
 import com.example.quanlyphongtro.model.Room;
@@ -21,6 +23,14 @@ public interface RoomDAO {
     List<RoomWithTenantInfo> getRoomWithTenantInfo();
     @Query("DELETE FROM ROOM")
     void deleteAllData();
+
+    @Delete
+    void deleteRoom(Room room);
+    @Update
+    void updateRoom(Room room);
+
+    @Query("SELECT * FROM ROOM WHERE roomNumber = :roomNumber")
+    Room getInfoRoomByRoomNumber(String roomNumber);
 
     @Query("SELECT ROOM.roomNumber, ROOM.status, ROOM.price, RoomType.typeName, RoomType.description\n" +
             "FROM Tenant \n" +

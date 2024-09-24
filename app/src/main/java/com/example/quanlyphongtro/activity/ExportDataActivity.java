@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -69,7 +71,7 @@ public class ExportDataActivity extends AppCompatActivity {
 
 
 
-
+        loadToolBar();
         loadView();
 
         btnFolderOpen.setOnClickListener(new View.OnClickListener() {
@@ -199,6 +201,32 @@ public class ExportDataActivity extends AppCompatActivity {
         btnFolderOpen = findViewById(R.id.btn_folder_open);
         btnExport = findViewById(R.id.btn_export);
         tvPathFile = findViewById(R.id.tv_path_file);
+    }
+
+    private void loadToolBar(){
+        Toolbar toolbar = findViewById(R.id.app_bar_export_db);
+        setSupportActionBar(toolbar);
+
+        // Hiển thị nút back
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        // Xóa title mặc định
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        // Đổi icon nút back
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_left); // Thay icon
+    }
+
+    // Xử lý sự kiện khi người dùng nhấn nút back trên toolbar
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Kết thúc Activity và quay lại Activity trước đó
+            finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void exportDatabase() {

@@ -7,7 +7,7 @@
     android:layout_margin="16dp">
 
     <TextView
-        android:id="@+id/tv_delete_name"
+        android:id="@+id/tv_room_dialog_name"
         android:text="Thêm dịch vụ"
         android:gravity="center"
         android:textSize="16sp"
@@ -19,42 +19,49 @@
 
     <LinearLayout
         android:padding="16dp"
-        android:orientation="horizontal"
-        android:gravity="center"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:text="Bạn có chắc chắn muốn xóa"
+            android:id="@+id/tv_room_sub_name_dialog"
+            android:text="Thêm dịch vụ mới vào hệ thống"
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:id="@+id/tv_sub_delete_name"
-            android:text="Internet"
-            android:gravity="center"
-            android:layout_marginStart="2dp"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/edt_room_number"
+            android:hint="Nhập tên phòng"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_color_white_outline_gray"
+            android:padding="12dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <TextView
-            android:text=" ?"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textColor="@color/black"
+        <Spinner
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:id="@+id/sp_select_room_type"
+            />
 
+        <EditText
+            android:id="@+id/edt_room_price"
+            android:hint="Nhập giá phòng"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_color_white_outline_gray"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
     <LinearLayout
+        android:padding="10dp"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -78,7 +85,7 @@
             android:text="Đồng ý"
             android:textColor="@color/white"
             android:layout_marginEnd="16dp"
-            android:id="@+id/btn_delete_dialog"
+            android:id="@+id/btn_add"
             android:textAllCaps="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

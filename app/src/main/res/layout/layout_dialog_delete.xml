@@ -7,7 +7,7 @@
     android:layout_margin="16dp">
 
     <TextView
-        android:id="@+id/tv_dialog_name"
+        android:id="@+id/tv_delete_name"
         android:text="Thêm dịch vụ"
         android:gravity="center"
         android:textSize="16sp"
@@ -19,37 +19,38 @@
 
     <LinearLayout
         android:padding="16dp"
-        android:orientation="vertical"
+        android:orientation="horizontal"
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/tv_sub_name_dialog"
-            android:text="Thêm dịch vụ mới vào hệ thống"
+            android:text="Bạn có chắc chắn muốn xóa"
             android:gravity="center"
             android:textSize="18sp"
             android:textColor="@color/black"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/edt_service_name"
-            android:hint="Nhập tên dịch vụ"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/shape_color_white_outline_gray"
-            android:padding="12dp"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/tv_sub_delete_name"
+            android:text="Internet"
+            android:gravity="center"
+            android:layout_marginStart="2dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
 
-        <EditText
-            android:id="@+id/edt_service_price"
-            android:hint="Nhập giá dịch vụ"
-            android:inputType="number"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/shape_color_white_outline_gray"
-            android:padding="12dp"
-            android:layout_width="match_parent"
+        <TextView
+            android:text=" ?"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 
@@ -78,7 +79,7 @@
             android:text="Đồng ý"
             android:textColor="@color/white"
             android:layout_marginEnd="16dp"
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_delete_dialog"
             android:textAllCaps="false"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

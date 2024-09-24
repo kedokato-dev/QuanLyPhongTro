@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,15 +20,40 @@ public class ItemRoomAdapter extends RecyclerView.Adapter<ItemRoomAdapter.ItemRo
     private Context context;
     private List<RoomWithTenantInfo> roomList;
 
-    private OnItemClickListener onItemClickListener;
+    private SetOnItemClickListener setOnItemClickListener;
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.onItemClickListener = listener;
+    private OnDeleteClickListener onDeleteClickListener;
+    private OnUpdateClickListener onUpdateClickListener;
+
+    public interface OnDeleteClickListener {
+        void onDeleteClick(int position);
     }
 
-    public interface OnItemClickListener {
+    public interface OnUpdateClickListener {
+        void onUpdateClick(int position);
+    }
+
+    public interface SetOnItemClickListener{
         void onItemClick(int position);
     }
+
+
+    public void setOnDeleteClickListener(OnDeleteClickListener listener) {
+        this.onDeleteClickListener = (OnDeleteClickListener) listener;
+    }
+
+    public void setOnUpdateClickListener(OnUpdateClickListener listener) {
+        this.onUpdateClickListener = (OnUpdateClickListener) listener;
+    }
+
+
+    public void setOnClickListener(SetOnItemClickListener listener){
+        this.setOnItemClickListener = listener;
+    }
+
+
+
+
 
 
     public ItemRoomAdapter(Context context) {
@@ -70,8 +96,26 @@ public class ItemRoomAdapter extends RecyclerView.Adapter<ItemRoomAdapter.ItemRo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.onItemClick(position);
+                if (setOnItemClickListener != null) {
+                    setOnItemClickListener.onItemClick(position);
+                }
+            }
+        });
+
+        holder.imgDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onDeleteClickListener != null){
+                    onDeleteClickListener.onDeleteClick(position);
+                }
+            }
+        });
+
+        holder.imgUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onUpdateClickListener != null){
+                    onUpdateClickListener.onUpdateClick(position);
                 }
             }
         });
@@ -92,12 +136,16 @@ public class ItemRoomAdapter extends RecyclerView.Adapter<ItemRoomAdapter.ItemRo
         private TextView roomName;
         private TextView roomStatus;
         private TextView userNumber;
+        private ImageView imgUpdate, imgDelete;
 
         public ItemRoomViewHolder(@NonNull View itemView) {
             super(itemView);
             roomName = itemView.findViewById(R.id.tv_room_name);
             roomStatus = itemView.findViewById(R.id.tv_room_status);
             userNumber = itemView.findViewById(R.id.tv_user_number);
+
+            imgDelete = itemView.findViewById(R.id.delete_icon);
+            imgUpdate = itemView.findViewById(R.id.update_icon);
         }
     }
 }

@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -166,7 +167,7 @@ public class HomeFragment extends Fragment {
         itemServiceAdapter.setOnDeleteClickListener(new ItemServiceAdapter.OnDeleteClickListener() {
             @Override
             public void onDeleteClick (int position) {
-                Dialog dialog = createDialog(R.layout.layout_dialog_delte, gravity);
+                Dialog dialog = createDialog(R.layout.layout_dialog_delete, gravity);
                 if (dialog == null) return;
 
                 TextView tvDeleteName = dialog.findViewById(R.id.tv_delete_name);
@@ -197,6 +198,8 @@ public class HomeFragment extends Fragment {
                             if (service != null) {
                                 // Xóa dịch vụ từ cơ sở dữ liệu
                                 database.serviceDAO().delete(service);
+
+                                Toast.makeText(getContext(), "Đã xóa thành công dịch vụ " + service.getServiceName(), Toast.LENGTH_SHORT).show();
 
                                 // Cập nhật dữ liệu trong RecyclerView
                                 itemServiceAdapter.removeItem(position);
@@ -264,9 +267,12 @@ public class HomeFragment extends Fragment {
                         Double dServicePrice = Double.parseDouble(strServicePrice);
                         service = new Service(finalId, strServiceName, dServicePrice);
 
+
+
                         database.serviceDAO().update(service);
 
                         loadData();
+                        Toast.makeText(getContext(), "Đã thêm thành công dịch vụ " + strServiceName, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
                     }
                 });

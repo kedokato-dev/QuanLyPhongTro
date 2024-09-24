@@ -21,6 +21,16 @@ public class Room {
         this.price = price;
     }
 
+    public Room( String roomNumber, int roomTypeId, String status, double price) {
+        this.roomNumber = roomNumber;
+        this.roomTypeId = roomTypeId;
+        this.status = status;
+        this.price = price;
+    }
+
+    public Room(){
+    }
+
     public int getRoomId() {
         return roomId;
     }
