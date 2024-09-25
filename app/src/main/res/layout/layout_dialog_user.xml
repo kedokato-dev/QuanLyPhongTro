@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_conner_16"
+    android:layout_margin="16dp">
+
+    <TextView
+        android:id="@+id/tv_dialog_name"
+        android:text="Thêm dịch vụ"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:textColor="@color/white"
+        android:background="@drawable/bg_blue_conner_16_top_left_top_right"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:padding="16dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_sub_name_dialog"
+            android:text="Thêm dịch vụ mới vào hệ thống"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edt_member_name"
+            android:hint="Nhập tên thành viên"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/shape_color_white_outline_gray"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edt_member_phone"
+            android:hint="Nhập SĐT"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_color_white_outline_gray"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edt_member_email"
+            android:hint="Nhập Email"
+            android:inputType="textEmailAddress"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_color_white_outline_gray"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/edt_member_cccd"
+            android:hint="Nhập CCCD"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_color_white_outline_gray"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:padding="10dp"
+        android:layout_marginBottom="20dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:textSize="16sp"
+            android:text="Thoát"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_color_red_outline_gray"
+            android:layout_weight="1"/>
+
+        <Button
+            android:textSize="16sp"
+            android:text="Đồng ý"
+            android:textColor="@color/white"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/btn_add"
+            android:textAllCaps="false"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_color_blue_outline_gray"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

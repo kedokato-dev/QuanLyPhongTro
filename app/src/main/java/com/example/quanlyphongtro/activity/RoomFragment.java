@@ -19,6 +19,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -66,6 +67,18 @@ public class RoomFragment extends Fragment {
         infoList = database.roomDAO().getRoomWithTenantInfo();
         itemRoomAdapter.setData(infoList);
         rcv.setAdapter(itemRoomAdapter);
+
+        rcv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0){
+                    fab.hide();
+                }else{
+                    fab.show();
+                }
+            }
+        });
 
 
         itemRoomAdapter.setOnClickListener(new ItemRoomAdapter.SetOnItemClickListener() {

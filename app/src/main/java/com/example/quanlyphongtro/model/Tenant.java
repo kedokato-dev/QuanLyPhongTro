@@ -23,6 +23,13 @@ public class Tenant {
         this.identityCard = identityCard;
     }
 
+    public Tenant( String fullName, String phone, String email, String identityCard) {
+        this.fullName = fullName;
+        this.phone = phone;
+        Email = email;
+        this.identityCard = identityCard;
+    }
+
     public int getTenantId() {
         return tenantId;
     }
