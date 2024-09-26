@@ -1,21 +1,27 @@
 package com.example.quanlyphongtro.activity;
 
 import android.app.Dialog;
+import android.app.SearchManager;
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -36,6 +42,7 @@ public class UserListActivity extends AppCompatActivity {
     private QuanLyPhongTroDB database;
     private ItemUserListAdapter itemUserListAdapter;
     private FloatingActionButton fab_add;
+    private SearchView searchView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,8 +103,12 @@ public class UserListActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         // Đổi icon nút back
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_left); // Thay icon
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_arrow_left);
+
+
     }
+
+
 
     // Xử lý sự kiện khi người dùng nhấn nút back trên toolbar
     @Override
@@ -109,6 +120,59 @@ public class UserListActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        // Lấy SearchView từ menu
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search).getActionView();
+
+        // Cài đặt SearchableInfo
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        // Thay đổi màu icon search
+        ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
+        searchIcon.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+
+        // đổi màu cho icon clear (X)
+        ImageView closeIcon = searchView.findViewById(androidx.appcompat.R.id.search_close_btn);
+        closeIcon.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+
+        // Thay đổi màu của icon search trong thanh nhập liệu
+        ImageView searchEditIcon = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon);
+        searchEditIcon.setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+
+        // Thay đổi màu của text (nếu cần)
+        EditText searchEditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchEditText.setTextColor(getResources().getColor(R.color.white));
+        searchEditText.setHintTextColor(getResources().getColor(R.color.white));
+
+        // Ví dụ: Thay đổi màu nền của khung nhập liệu
+        View searchEditFrame = searchView.findViewById(androidx.appcompat.R.id.search_edit_frame);
+        searchEditFrame.setBackgroundColor(getResources().getColor(R.color.transparent));
+
+        // Cài đặt listener cho SearchView
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                itemUserListAdapter.getFilter().filter(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                itemUserListAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+
+        return true;
+    }
+
 
     private Dialog createDialog(int layoutResId, int gravity) {
         Dialog dialog = new Dialog(this);

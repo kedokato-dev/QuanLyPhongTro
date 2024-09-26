@@ -5,25 +5,38 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.pojo.UserPOJO;
 import com.example.quanlyphongtro.R;
+import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
+import com.example.quanlyphongtro.pojo.UserPOJO;
 
 import java.util.List;
 
-public class ItemUserListAdapter extends RecyclerView.Adapter<ItemUserListAdapter.ItemUserViewHoler> {
+public class ItemUserListAdapter extends RecyclerView.Adapter<ItemUserListAdapter.ItemUserViewHoler> implements Filterable {
     private Context context;
     private List<UserPOJO> userPOJOList;
+    private List<UserPOJO> userPOJOListOld;
     private OnClickItemUpdateListener onClickItemUpdateListener;
     private OnClickItemDeleteListener onClickItemDeleteListener;
 
+   private QuanLyPhongTroDB database;
+
     public ItemUserListAdapter(Context context) {
         this.context = context;
+        this.database = QuanLyPhongTroDB.getInstance(context);
+
+    }
+
+    public ItemUserListAdapter (List<UserPOJO> userPOJOList){
+        this.userPOJOList = userPOJOList;
+        this.userPOJOListOld = userPOJOList;
     }
 
     public void setData(List<UserPOJO> list){
@@ -38,6 +51,7 @@ public class ItemUserListAdapter extends RecyclerView.Adapter<ItemUserListAdapte
     public void setOnClickItemDeleteListener (OnClickItemDeleteListener onClickItemDeleteListener) {
         this.onClickItemDeleteListener = onClickItemDeleteListener;
     }
+
 
     public interface OnClickItemUpdateListener{
         void onClickUpdateItem(int position);
@@ -111,4 +125,30 @@ public class ItemUserListAdapter extends RecyclerView.Adapter<ItemUserListAdapte
             imgDelete = itemView.findViewById(R.id.delete_icon);
         }
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String searchQuery = charSequence.toString().trim();
+                userPOJOListOld = database.userDAO().getListUser();
+                if (searchQuery.isEmpty()) {
+                    userPOJOList = userPOJOListOld;
+                } else {
+                    userPOJOList = database.userDAO().searchMemberByName(searchQuery);
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = userPOJOList;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                userPOJOList = (List<UserPOJO>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
+    }
+
 }

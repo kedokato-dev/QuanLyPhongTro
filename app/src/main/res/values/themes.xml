@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.QuanLyPhongTRo" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="Base.Theme.QuanLyPhongTRo" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:fontFamily">@font/robotolight</item>
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
@@ -26,6 +26,13 @@
         <item name="android:background">@color/blue</item>
         <item name="android:textColor">#FFF</item>
     </style>
-    
-    
+
+    <style name="CustomSearchView" parent="Widget.AppCompat.SearchView">
+        <item name="queryBackground">@android:color/transparent</item>
+        <item name="android:textColor">@color/white</item> <!-- Màu text -->
+        <item name="android:iconTint" tools:targetApi="o">@color/white</item> <!-- Màu icon -->
+    </style>
+
+
+
 </resources>

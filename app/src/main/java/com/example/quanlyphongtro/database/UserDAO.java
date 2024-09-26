@@ -36,4 +36,7 @@ public interface UserDAO
 
     @Query("SELECT * FROM TENANT WHERE identityCard = :cccd")
     Tenant getMemberByCCCD(String cccd);
+
+    @Query("SELECT fullName, phone, Email, identityCard FROM TENANT WHERE fullName LIKE '%' || :name || '%'")
+    List<UserPOJO> searchMemberByName(String name);
 }
