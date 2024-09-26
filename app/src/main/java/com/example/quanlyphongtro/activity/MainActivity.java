@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.quanlyphongtro.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.MaterialShapeDrawable;
 
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationView = findViewById(R.id.bottomNavView);
         frameLayout = findViewById(R.id.frameLayout);
+
 
         // bo tròn các góc của thanh navigation
         MaterialShapeDrawable shapeDrawable = (MaterialShapeDrawable) bottomNavigationView.getBackground();

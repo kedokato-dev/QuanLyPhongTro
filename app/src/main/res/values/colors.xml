@@ -10,8 +10,6 @@
     <color name="yellow">#FFEB3B</color>
     <color name="transparent">#30FFFFFF</color>
 
-
-
     <style name="CustomActiveIndicator">
         <item name="android:color">@color/blue</item>
         <item name="android:height">8dp</item>

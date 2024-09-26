@@ -124,7 +124,7 @@ public class UserListActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.menu_search, menu);
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 
         // Lấy SearchView từ menu
@@ -133,6 +133,8 @@ public class UserListActivity extends AppCompatActivity {
         // Cài đặt SearchableInfo
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setMaxWidth(Integer.MAX_VALUE);
+
+        searchView.setQueryHint("Nhập tên muốn tìm ?");
 
         // Thay đổi màu icon search
         ImageView searchIcon = searchView.findViewById(androidx.appcompat.R.id.search_button);
