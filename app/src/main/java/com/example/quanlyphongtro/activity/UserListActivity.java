@@ -214,7 +214,7 @@ public class UserListActivity extends AppCompatActivity {
         EditText edtMemberCCCD = dialog.findViewById(R.id.edt_member_cccd);
 
         Button btnAdd = dialog.findViewById(R.id.btn_add);
-        Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+        ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
 
 
@@ -242,7 +242,7 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
@@ -277,7 +277,7 @@ public class UserListActivity extends AppCompatActivity {
                 EditText edtMemberCCCD = dialog.findViewById(R.id.edt_member_cccd);
 
                 Button btnAdd = dialog.findViewById(R.id.btn_add);
-                Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
 
 
@@ -316,7 +316,7 @@ public class UserListActivity extends AppCompatActivity {
                     }
                 });
 
-                btnCancel.setOnClickListener(new View.OnClickListener() {
+                ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
@@ -342,7 +342,7 @@ public class UserListActivity extends AppCompatActivity {
 
 
                 Button btnDelete = dialog.findViewById(R.id.btn_delete_dialog);
-                Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
 
                 tvDialogDelete.setText("Xóa thành viên");
@@ -362,7 +362,7 @@ public class UserListActivity extends AppCompatActivity {
                     }
                 });
 
-                btnCancel.setOnClickListener(new View.OnClickListener() {
+                ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();

@@ -6,18 +6,37 @@
     android:background="@drawable/bg_white_conner_16"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_dialog_name"
+    <!-- Header với TextView và nút X -->
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_blue_conner_16_top_left_top_right"
-        android:gravity="center"
-        android:padding="12dp"
-        android:fontFamily="@font/robotolight"
-        android:text="Lọc hóa đơn"
-        android:textColor="@color/white"
-        android:textSize="18sp" />
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/tv_dialog_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_blue_conner_16_top_left_top_right"
+            android:gravity="center"
+            android:padding="12dp"
+            android:fontFamily="@font/robotolight"
+            android:text="Lọc hóa đơn"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/ic_close"
+            android:contentDescription="Close"
+            android:clickable="true"
+            android:focusable="true" />
+    </RelativeLayout>
+
+    <!-- Nội dung chính của Dialog -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,7 +52,6 @@
             android:fontFamily="@font/robotolight"
             android:textColor="@color/black"
             android:textSize="18sp" />
-
 
         <RadioGroup
             android:layout_width="match_parent"
@@ -65,32 +83,16 @@
                 android:text="Tất cả"
                 android:fontFamily="@font/robotolight"
                 android:textSize="18sp" />
-
         </RadioGroup>
-
-
     </LinearLayout>
 
+    <!-- Nút hành động -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:orientation="horizontal"
         android:padding="10dp">
-
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_weight="1"
-            android:background="@drawable/shape_color_red_outline_gray"
-            android:text="Thoát"
-            android:fontFamily="@font/robotolight"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
 
         <Button
             android:id="@+id/btn_confirm"
@@ -104,7 +106,6 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textSize="16sp" />
-
     </LinearLayout>
 
 </LinearLayout>

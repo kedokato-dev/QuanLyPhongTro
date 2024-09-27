@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -165,12 +166,15 @@ public class RoomFragment extends Fragment {
         EditText edtRoomPrice = dialog.findViewById(R.id.edt_room_price);
 
         Button btnAdd = dialog.findViewById(R.id.btn_add);
-        Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+        ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
         Spinner spinner = dialog.findViewById(R.id.sp_select_room_type);
 
 
         roomTypeList = database.roomTypeDAO().getAllRoomType();
+
+        tvSubDialogName.setText("Nhập thông tin phòng mới vào hệ thống");
+        tvDialogName.setText("Thêm phòng!");
 
         // Lấy dữ liệu loại phòng đưa vào arr loại phòng
         List<String> roomTypeNames = new ArrayList<>();
@@ -187,7 +191,7 @@ public class RoomFragment extends Fragment {
         spinner.setAdapter(adapter);
 
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
@@ -241,13 +245,13 @@ public class RoomFragment extends Fragment {
                 TextView tvDeleteName = dialog.findViewById(R.id.tv_delete_name);
                 TextView tvSubDeleteName = dialog.findViewById(R.id.tv_sub_delete_name);
 
-                Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView ivClose = dialog.findViewById(R.id.iv_close);
                 Button btnDelete = dialog.findViewById(R.id.btn_delete_dialog);
 
                 tvDeleteName.setText("Xóa phòng");
                 tvSubDeleteName.setText("phòng " + infoList.get(position).getRoomNumber());
 
-                btnCancel.setOnClickListener(new View.OnClickListener() {
+                ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
@@ -293,13 +297,13 @@ public class RoomFragment extends Fragment {
                 EditText edtRoomPrice = dialog.findViewById(R.id.edt_room_price);
 
                 Button btnAdd = dialog.findViewById(R.id.btn_add);
-                Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView ivClose  = dialog.findViewById(R.id.iv_close);
 
                 Spinner spinner = dialog.findViewById(R.id.sp_select_room_type);
 
 
-                tvDialogName.setText("Chỉnh sửa thông tin phòng");
-                tvSubDialogName.setText("");
+                tvDialogName.setText("Chỉnh sửa thông tin phòng!");
+                tvSubDialogName.setText("Hãy nhập thông tin phòng bạn muốn sửa");
 
                 roomTypeList = database.roomTypeDAO().getAllRoomType();
 
@@ -353,7 +357,7 @@ public class RoomFragment extends Fragment {
                     }
                 });
 
-                btnCancel.setOnClickListener(new View.OnClickListener() {
+                ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();

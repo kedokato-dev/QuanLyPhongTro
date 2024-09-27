@@ -12,6 +12,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -131,9 +132,9 @@ public class HomeFragment extends Fragment {
         EditText servicePrice = dialog.findViewById(R.id.edt_service_price);
 
         Button btn_add = dialog.findViewById(R.id.btn_add);
-        Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+        ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
@@ -174,13 +175,13 @@ public class HomeFragment extends Fragment {
                 TextView tvSubDeleteName = dialog.findViewById(R.id.tv_sub_delete_name);
 
                 Button btn_delete = dialog.findViewById(R.id.btn_delete_dialog);
-                Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
                 tvDeleteName.setText("Chú ý");
 
                 tvSubDeleteName.setText(list.get(position).getServiceName());
 
-                btn_cancel.setOnClickListener(new View.OnClickListener() {
+                ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();
@@ -227,7 +228,7 @@ public class HomeFragment extends Fragment {
                 EditText servicePrice = dialog.findViewById(R.id.edt_service_price);
 
                 Button btn_update = dialog.findViewById(R.id.btn_add);
-                Button btn_cancel = dialog.findViewById(R.id.btn_cancel);
+                ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
                 tvDialogName.setText("Chỉnh sửa thông tin dịch vụ");
                 tvSubDialogName.setText("Hãy nhập thông tin dịch vụ bạn muốn sửa");
@@ -239,7 +240,7 @@ public class HomeFragment extends Fragment {
                 serviceName.setText(strServiceName);
                 servicePrice.setText(strServicePrice);
 
-                btn_cancel.setOnClickListener(new View.OnClickListener() {
+                ivClose.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         dialog.dismiss();

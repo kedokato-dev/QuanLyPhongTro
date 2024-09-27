@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import androidx.annotation.NonNull;
@@ -154,7 +155,7 @@ public class BillFragment extends Fragment {
         }
 
         Button btnConfirm = dialog.findViewById(R.id.btn_confirm);
-        Button btnCancel = dialog.findViewById(R.id.btn_cancel);
+        ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,7 +188,7 @@ public class BillFragment extends Fragment {
             }
         });
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        ivClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
