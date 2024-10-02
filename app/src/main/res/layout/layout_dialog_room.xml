@@ -89,6 +89,7 @@
             android:text="Đồng ý"
             android:textColor="@color/white"
             android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
             android:id="@+id/btn_add"
             android:textAllCaps="false"
             android:layout_width="0dp"
