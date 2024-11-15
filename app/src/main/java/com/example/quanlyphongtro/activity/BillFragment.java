@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,7 +39,9 @@ import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
 import com.example.quanlyphongtro.pojo.ItemBillPOJO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -105,7 +109,7 @@ public class BillFragment extends Fragment {
                 String status = itemBillPOJOList.get(position).getStatus();
                 Double totalAmount = itemBillPOJOList.get(position).getTotalAmount();
 
-                // Tạo Intent để truyền dữ liệu
+                // Tạo Intent để truyền dữ liệu sang bên DetailBillActivity
                 Intent intent = new Intent(getContext(), DetailBillActivity.class);
                 intent.putExtra("roomNumber", roomNumber);
                 intent.putExtra("totalAmount", totalAmount);
@@ -240,13 +244,31 @@ public class BillFragment extends Fragment {
         ImageView ivClose = dialog.findViewById(R.id.iv_close);
 
         tvNameDialog.setText("Xác nhận xóa hóa đơn");
-        tvSubNameDialog.setText("Phòng : "+itemBillPOJOList.get(position).getRoomNumber() + " Ngày lập: "+itemBillPOJOList.get(position).getIssueDate());
+        tvSubNameDialog.setText("Phòng : " + itemBillPOJOList.get(position).getRoomNumber() + " Ngày lập: " + itemBillPOJOList.get(position).getIssueDate());
 
         btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dialog.show();
+                // VIẾT LOGIC HÀM XÓA Ở ĐÂY
+                String issueDate = itemBillPOJOList.get(position).getIssueDate();
 
+                try {
+                    String issueDateFormated = formatDate(issueDate);
+
+                    // lấy ra ID của hóa đơn
+                    int billID = database.billDAO().getBillIdByRoomNumberAndIssueDate(issueDateFormated ,itemBillPOJOList.get(position).getRoomNumber());
+
+                    // SAU KHI CÓ ID -> XÓA CHI TIẾT HÓA ĐƠN -> XÓA HÓA ĐƠN
+                    database.billDAO().deleteBillDetailByBillIdAndIssueDate(billID, issueDateFormated);
+                    database.billDAO().deleteBillByByBillIdAndIssueDate(billID, issueDateFormated);
+                    Toast.makeText(getContext(), "Xóa hóa đơn thành công ❤", Toast.LENGTH_SHORT).show();
+                    loadData();
+                } catch (ParseException e) {
+                    Toast.makeText(getContext(), "Lỗi rồi huhu", Toast.LENGTH_SHORT).show();
+                    throw new RuntimeException(e);
+                }
+                dialog.dismiss();
             }
         });
 
@@ -276,6 +298,7 @@ public class BillFragment extends Fragment {
         }
     }
 
+
     private void loadData() {
         itemBillPOJOList = new ArrayList<>();
         // Lấy lựa chọn đã lưu trong SharedPreferences
@@ -296,5 +319,15 @@ public class BillFragment extends Fragment {
             itemBillPOJOList = database.billDAO().getListItemBill();
             itemBillAdapter.setData(itemBillPOJOList);
         }
+    }
+
+    private String formatDate(String input) throws ParseException {
+        String dateAfterFormated = "";
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date date = inputFormat.parse(input);
+        return dateAfterFormated = outputFormat.format(date);
+
     }
 }

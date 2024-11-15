@@ -376,7 +376,7 @@ public class AddBillActivity extends AppCompatActivity {
 
 
     private boolean checkUniqueService() {
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
                 for (int j = i + 1; j < list.size(); j++) {
                     if (list.get(i).getServiceName().equals(list.get(j).getServiceName())) return true;
@@ -388,7 +388,7 @@ public class AddBillActivity extends AppCompatActivity {
 
     private double totalAmountServices() {
         double totalService = 0;
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
                 totalService = totalService + list.get(i).getAmount();
             }

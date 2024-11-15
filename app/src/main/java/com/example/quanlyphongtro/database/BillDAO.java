@@ -99,6 +99,19 @@ public interface BillDAO {
             "where bill.issueDate =:date and bill.totalAmount =:totalAmount")
     int getBillByIssueDateAndTotal(String date, double totalAmount);
 
-//    @Query("")
-//    void deleteBillByRoomNumberAndIssueDate(String roomNumber, String date);
+//     hai hàm sql bên dưới để xóa hóa đơn theo [ngày lập hóa đơn] và [mã hóa đơn]
+
+    @Query("DELETE FROM BillDetail \n" +
+            "WHERE billId = (SELECT billId FROM Bill WHERE billId =:billID AND issueDate =:date);")
+    void deleteBillDetailByBillIdAndIssueDate(int billID, String date);
+
+    @Query("DELETE FROM Bill \n" +
+            "WHERE billId =:billID AND issueDate =:date;")
+    void deleteBillByByBillIdAndIssueDate(int billID, String date);
+
+    // VIẾT HÀM LẤY RA ID CỦA HÓA ĐƠN THEO NGÀY LẬP HÓA ĐƠN VÀ SỐ PHÒNG
+    @Query("SELECT Bill.billId FROM Bill\n" +
+            "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
+            "WHERE Bill.issueDate =:date AND Room.roomNumber =:roomNumber")
+    int getBillIdByRoomNumberAndIssueDate(String date, String roomNumber);
 }
