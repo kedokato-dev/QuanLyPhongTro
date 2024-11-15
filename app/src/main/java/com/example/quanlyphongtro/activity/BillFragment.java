@@ -1,5 +1,8 @@
 package com.example.quanlyphongtro.activity;
 
+import static android.app.Activity.RESULT_OK;
+
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -18,8 +21,10 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -30,6 +35,7 @@ import com.example.quanlyphongtro.R;
 import com.example.quanlyphongtro.adapter.ItemBillAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
 import com.example.quanlyphongtro.pojo.ItemBillPOJO;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +43,13 @@ import java.util.List;
 
 public class BillFragment extends Fragment {
     private RecyclerView rcv_item_bill;
+    private FloatingActionButton fab_add;
     private List<ItemBillPOJO> itemBillPOJOList;
     private QuanLyPhongTroDB database;
     private ItemBillAdapter itemBillAdapter;
     private Toolbar toolbar;
     private SharedPreferences sharedPreferences;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         setHasOptionsMenu(true); // Để thông báo rằng Fragment này có Options Menu
@@ -64,12 +72,15 @@ public class BillFragment extends Fragment {
     }
 
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bill, container, false);
 
         toolbar = view.findViewById(R.id.app_bar_bill_list);
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+
+        fab_add = view.findViewById(R.id.fab_add_bill);
 
         // Tắt tittle mặc định cho toolbar
         if (((AppCompatActivity) getActivity()).getSupportActionBar() != null) {
@@ -84,8 +95,6 @@ public class BillFragment extends Fragment {
         itemBillAdapter = new ItemBillAdapter(getContext());
 
         database = QuanLyPhongTroDB.getInstance(getContext());
-//        itemBillPOJOList = database.billDAO().getListItemBill();
-//        itemBillAdapter.setData(itemBillPOJOList);
         loadData();
         rcv_item_bill.setAdapter(itemBillAdapter);
 
@@ -105,9 +114,31 @@ public class BillFragment extends Fragment {
             }
         });
 
+        itemBillAdapter.setOnItemUpdateClickListener(new ItemBillAdapter.OnItemUpdateClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+        });
+
+        itemBillAdapter.setOnItemDeleteClickListener(new ItemBillAdapter.OnItemDeleteClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                openDialogDelete(position);
+            }
+        });
+
+        fab_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addBill();
+            }
+        });
+
 
         return view;
     }
+
 
     private Dialog createDialog(int layoutResId, int gravity) {
         Dialog dialog = new Dialog(getContext());
@@ -195,6 +226,54 @@ public class BillFragment extends Fragment {
             }
         });
         dialog.show();
+    }
+
+    private void openDialogDelete(int position) {
+        Dialog dialog = createDialog(R.layout.layout_dialog_delete, Gravity.CENTER);
+        if (dialog == null) {
+            return;
+        }
+
+        TextView tvNameDialog = dialog.findViewById(R.id.tv_delete_name);
+        TextView tvSubNameDialog = dialog.findViewById(R.id.tv_sub_delete_name);
+        Button btnDelete = dialog.findViewById(R.id.btn_delete_dialog);
+        ImageView ivClose = dialog.findViewById(R.id.iv_close);
+
+        tvNameDialog.setText("Xác nhận xóa hóa đơn");
+        tvSubNameDialog.setText("Phòng : "+itemBillPOJOList.get(position).getRoomNumber() + " Ngày lập: "+itemBillPOJOList.get(position).getIssueDate());
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.show();
+
+            }
+        });
+
+        ivClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void addBill() {
+        Intent intent = new Intent(getContext(), AddBillActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK && data != null) {
+            String action = data.getStringExtra("action");
+            if (action.equals("oke")) {
+                loadData();
+            }
+        }
     }
 
     private void loadData() {

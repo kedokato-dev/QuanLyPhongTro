@@ -6,6 +6,7 @@ import android.icu.text.NumberFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,8 @@ public class ItemBillAdapter extends RecyclerView.Adapter<ItemBillAdapter.ItemBi
     private List<ItemBillPOJO> itemBillPOJOList;
 
     private OnItemClickListener onItemClickListener;
+    private OnItemDeleteClickListener onItemDeleteClickListener;
+    private OnItemUpdateClickListener onItemUpdateClickListener;
 
     public void setData(List<ItemBillPOJO> list){
         this.itemBillPOJOList = list;
@@ -37,11 +40,26 @@ public class ItemBillAdapter extends RecyclerView.Adapter<ItemBillAdapter.ItemBi
         this.onItemClickListener = listener;
     }
 
+    public void setOnItemUpdateClickListener(OnItemUpdateClickListener listener){
+        this.onItemUpdateClickListener = listener;
+    }
+
+    public void setOnItemDeleteClickListener(OnItemDeleteClickListener listener){
+        this.onItemDeleteClickListener = listener;
+    }
+
     // sử dụng call back để tạo sự kiện click ở bên fragment
     public interface OnItemClickListener {
         void onItemClick(int position);
     }
 
+    public interface OnItemDeleteClickListener{
+        void onItemClick(int position);
+    }
+
+    public interface OnItemUpdateClickListener{
+        void onItemClick(int position);
+    }
 
     @NonNull
     @Override
@@ -80,6 +98,25 @@ public class ItemBillAdapter extends RecyclerView.Adapter<ItemBillAdapter.ItemBi
                 }
             }
         });
+
+        holder.updateIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemUpdateClickListener != null){
+                    onItemUpdateClickListener.onItemClick(position);
+                }
+            }
+        });
+
+        holder.deleteIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onItemDeleteClickListener != null){
+                    onItemDeleteClickListener.onItemClick(position);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -95,6 +132,8 @@ public class ItemBillAdapter extends RecyclerView.Adapter<ItemBillAdapter.ItemBi
         private TextView issueDate;
         private TextView totalAmount;
         private TextView status;
+
+        private ImageView updateIcon, deleteIcon;
         public ItemBillViewholder(@NonNull View itemView) {
             super(itemView);
 
@@ -102,6 +141,9 @@ public class ItemBillAdapter extends RecyclerView.Adapter<ItemBillAdapter.ItemBi
             issueDate = itemView.findViewById(R.id.tv_issue_date);
             totalAmount = itemView.findViewById(R.id.tv_total_price);
             status = itemView.findViewById(R.id.tv_status_bill);
+
+            updateIcon = itemView.findViewById(R.id.update_icon);
+            deleteIcon = itemView.findViewById(R.id.delete_icon);
         }
     }
 }

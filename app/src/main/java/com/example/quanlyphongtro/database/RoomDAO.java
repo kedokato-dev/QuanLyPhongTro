@@ -57,4 +57,6 @@ public interface RoomDAO {
             "INNER JOIN RoomType ON ROOM.roomTypeId = RoomType.roomTypeId\n" +
             "WHERE ROOM.roomNumber = :roomNumber")
     List<RoomNumber_RoomTypeName> getRoomNumber_RoomTypeName(String roomNumber);
+
+
 }

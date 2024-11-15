@@ -2,6 +2,7 @@ package com.example.quanlyphongtro.model;
 
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "BillDetail", foreignKeys ={
@@ -18,6 +19,14 @@ public class BillDetail {
 
     public BillDetail(int billDetailId, int billId, int serviceId, int quantity, double amount) {
         this.billDetailId = billDetailId;
+        this.billId = billId;
+        this.serviceId = serviceId;
+        this.quantity = quantity;
+        this.amount = amount;
+    }
+
+    @Ignore
+    public BillDetail( int billId, int serviceId, int quantity, double amount) {
         this.billId = billId;
         this.serviceId = serviceId;
         this.quantity = quantity;

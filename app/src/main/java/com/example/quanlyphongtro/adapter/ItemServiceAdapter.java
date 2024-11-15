@@ -93,7 +93,7 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
         holder.imgUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onDeleteClickListener != null) {
+                if (onUpdateClickListener != null) {
                     onUpdateClickListener.onUpdateClick(position);
                 }
             }

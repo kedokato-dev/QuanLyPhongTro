@@ -1,6 +1,7 @@
 package com.example.quanlyphongtro.activity;
 
 import android.icu.text.NumberFormat;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -21,7 +22,9 @@ import com.example.quanlyphongtro.pojo.ItemBillPOJO;
 import com.example.quanlyphongtro.pojo.RoomNumber_RoomTypeName;
 import com.example.quanlyphongtro.pojo.ServiceInBillPOJO;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -34,10 +37,11 @@ public class DetailBillActivity extends AppCompatActivity {
     private ItemServiceBillAdapter itemServiceBillAdapter;
     private List<ServiceInBillPOJO> listService;
     private List<ItemBillPOJO> inforRoomBill;
-    private  List<RoomNumber_RoomTypeName> roomNumber_roomTypeNames;
+    private List<RoomNumber_RoomTypeName> roomNumber_roomTypeNames;
 
     private TextView roomNumber;
     private TextView roomTypeName;
+    private TextView memberName;
     private TextView issueDate;
     private TextView roomPrice;
     private TextView totalAmountService;
@@ -63,7 +67,7 @@ public class DetailBillActivity extends AppCompatActivity {
         itemServiceBillAdapter = new ItemServiceBillAdapter(this);
         database = QuanLyPhongTroDB.getInstance(this);
 
-        LinearLayoutManager linearLayoutManager  = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         rcv_item_service_in_bill.setLayoutManager(linearLayoutManager);
 
         listService = database.serviceDAO().getListServiceInBill(roomNumerValue);
@@ -83,8 +87,7 @@ public class DetailBillActivity extends AppCompatActivity {
     }
 
 
-
-    private void loadToolBar(){
+    private void loadToolBar() {
         Toolbar toolbar = findViewById(R.id.app_bar_detail_bill);
         setSupportActionBar(toolbar);
 
@@ -110,20 +113,33 @@ public class DetailBillActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void loadView(){
+    private void loadView() {
         roomNumber = findViewById(R.id.tv_room_number_bill_detail);
         roomTypeName = findViewById(R.id.tv_room_type_bill_detail);
+        memberName = findViewById(R.id.tv_member_name_detail_bill);
         issueDate = findViewById(R.id.tv_issue_date_bill_detail);
         roomPrice = findViewById(R.id.tv_room_price_bill_detail);
         totalAmountService = findViewById(R.id.tv_total_service_amonut);
         totalAmount = findViewById(R.id.tv_total_amount);
         status = findViewById(R.id.tv_status_bill_detail);
+
+
     }
 
     private void loadDetailBill() {
         roomNumber.setText(inforRoomBill.get(0).getRoomNumber());
         roomTypeName.setText(roomNumber_roomTypeNames.get(0).getTypeName());
+
+
         issueDate.setText(inforRoomBill.get(0).getIssueDate());
+        String strIssueDate = issueDate.getText().toString();
+        String date = "";
+        try {
+            date = formatDate(strIssueDate);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
 
         NumberFormat numberFormat = NumberFormat.getInstance(new Locale("vi", "VN"));
         String formattedRoomPrice = numberFormat.format(roomNumber_roomTypeNames.get(0).getPrice());
@@ -134,10 +150,27 @@ public class DetailBillActivity extends AppCompatActivity {
         totalAmount.setText(formattedTotalAmount);
         status.setText(getStatus);
 
-        if("Chưa thanh toán".equals(getStatus)){
+
+        int id = database.billDAO().getBillByIssueDateAndTotal(date, getTotalAmount);
+
+        String strMemberName = database.billDAO().getNamePaidInBillByIdAndIssueDate(id, date);
+
+        memberName.setText(strMemberName);
+
+        if ("Chưa thanh toán".equals(getStatus)) {
             status.setTextColor(this.getResources().getColor(R.color.red));
-        }else if("Đã thanh toán".equals(getStatus)){
+        } else if ("Đã thanh toán".equals(getStatus)) {
             status.setTextColor(this.getResources().getColor(R.color.green));
         }
+    }
+
+    private String formatDate(String input) throws ParseException {
+        String dateAfterFormated = "";
+        SimpleDateFormat inputFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Date date = inputFormat.parse(input);
+        return dateAfterFormated = outputFormat.format(date);
+
     }
 }

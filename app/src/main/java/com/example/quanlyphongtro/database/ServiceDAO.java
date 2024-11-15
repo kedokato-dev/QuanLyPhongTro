@@ -24,6 +24,12 @@ public interface ServiceDAO {
     @Update
     void update(Service service);
 
+    @Query("-- lấy ra thông tin về giá dịch vụ\n" +
+            "SELECT Service.serviceName ,Service.pricePerUnit\n" +
+            "FROM Service\n" +
+            "WHERE Service.serviceName = :serviceName")
+    List<ServicePOJO> getNameAndPriceService(String serviceName);
+
     @Query("SELECT * FROM service WHERE serviceName = :serviceName AND pricePerUnit = :servicePrice")
     Service getServiceByNameAndPrice(String serviceName, double servicePrice);
     @Query("SELECT serviceName, pricePerUnit FROM SERVICE")
