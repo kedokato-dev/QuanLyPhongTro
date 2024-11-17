@@ -125,6 +125,4 @@ public class ItemServiceAdapter extends RecyclerView.Adapter<ItemServiceAdapter.
             imgUpdate = itemView.findViewById(R.id.update_icon);
         }
     }
-
-
 }

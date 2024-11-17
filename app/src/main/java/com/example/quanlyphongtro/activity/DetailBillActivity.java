@@ -151,11 +151,13 @@ public class DetailBillActivity extends AppCompatActivity {
         status.setText(getStatus);
 
 
-        int id = database.billDAO().getBillByIssueDateAndTotal(date, getTotalAmount);
+        int id = database.billDAO().getBillByIssueDateAndTotal(date, roomNumerValue);
+
 
         String strMemberName = database.billDAO().getNamePaidInBillByIdAndIssueDate(id, date);
 
         memberName.setText(strMemberName);
+
 
         if ("Chưa thanh toán".equals(getStatus)) {
             status.setTextColor(this.getResources().getColor(R.color.red));

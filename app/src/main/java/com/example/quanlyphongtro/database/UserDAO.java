@@ -41,4 +41,7 @@ public interface UserDAO
     List<UserPOJO> searchMemberByName(String name);
     @Query("SELECT * FROM TENANT WHERE fullName LIKE '%' || :name || '%'")
     Tenant getTenantByNameFullName(String name);
+
+    @Query("SELECT * FROM TENANT WHERE TenantID =:tenantID")
+    Tenant getTenantByTenantID(int tenantID);
 }

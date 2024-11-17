@@ -121,7 +121,7 @@ public class BillFragment extends Fragment {
         itemBillAdapter.setOnItemUpdateClickListener(new ItemBillAdapter.OnItemUpdateClickListener() {
             @Override
             public void onItemClick(int position) {
-
+               updateBill(position);
             }
         });
 
@@ -142,6 +142,8 @@ public class BillFragment extends Fragment {
 
         return view;
     }
+
+
 
 
     private Dialog createDialog(int layoutResId, int gravity) {
@@ -282,8 +284,24 @@ public class BillFragment extends Fragment {
         dialog.show();
     }
 
+
+
     private void addBill() {
         Intent intent = new Intent(getContext(), AddBillActivity.class);
+        startActivityForResult(intent, 1);
+    }
+
+    private void updateBill(int position) {
+//        Intent intent = new Intent(getContext(), UpdateBillActivity.class);
+//        startActivityForResult(intent, 1);
+
+        String roomNumber = itemBillPOJOList.get(position).getRoomNumber();
+        String issueDate = itemBillPOJOList.get(position).getIssueDate();
+
+        // Tạo Intent để truyền dữ liệu sang bên DetailBillActivity
+        Intent intent = new Intent(getContext(), UpdateBillActivity.class);
+        intent.putExtra("roomNumber", roomNumber);
+        intent.putExtra("issueDate", issueDate);
         startActivityForResult(intent, 1);
     }
 

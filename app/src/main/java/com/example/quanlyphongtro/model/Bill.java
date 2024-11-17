@@ -18,7 +18,8 @@ public class Bill {
     private double totalAmount;
     private String status;
 
-    @Ignore
+
+
     public Bill(int billId, int roomId, int tenantId, String issueDate, double totalAmount, String status) {
         this.billId = billId;
         this.roomId = roomId;
@@ -27,7 +28,7 @@ public class Bill {
         this.totalAmount = totalAmount;
         this.status = status;
     }
-
+    @Ignore
     public Bill( int roomId, int tenantId, String issueDate, double totalAmount, String status) {
         this.roomId = roomId;
         this.tenantId = tenantId;

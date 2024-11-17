@@ -1,6 +1,7 @@
 package com.example.quanlyphongtro.model;
 
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Tenant")
@@ -15,6 +16,7 @@ public class Tenant {
     public Tenant(){
 
     }
+    @Ignore
     public Tenant(int tenantId, String fullName, String phone, String email, String identityCard) {
         this.tenantId = tenantId;
         this.fullName = fullName;

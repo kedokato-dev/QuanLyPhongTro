@@ -7,6 +7,7 @@ import androidx.room.Query;
 
 import com.example.quanlyphongtro.model.Bill;
 import com.example.quanlyphongtro.pojo.ItemBillPOJO;
+import com.example.quanlyphongtro.pojo.ServicePOJO;
 
 import java.util.List;
 
@@ -96,8 +97,9 @@ public interface BillDAO {
     String  getNamePaidInBillByIdAndIssueDate(int id, String date);
 
     @Query("SELECT billId from bill\n" +
-            "where bill.issueDate =:date and bill.totalAmount =:totalAmount")
-    int getBillByIssueDateAndTotal(String date, double totalAmount);
+            "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
+            "where bill.issueDate =:date and Room.roomNumber =:roomNumber")
+    int getBillByIssueDateAndTotal(String date, String roomNumber);
 
 //     hai hàm sql bên dưới để xóa hóa đơn theo [ngày lập hóa đơn] và [mã hóa đơn]
 
@@ -114,4 +116,23 @@ public interface BillDAO {
             "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
             "WHERE Bill.issueDate =:date AND Room.roomNumber =:roomNumber")
     int getBillIdByRoomNumberAndIssueDate(String date, String roomNumber);
+
+
+    // VIẾT HÀM LẤY RA DANH SÁCH DỊCH VỤ MÀ PHÒNG ĐÓ SỬ DỤNG
+    @Query("SELECT Service.serviceName, Service.pricePerUnit ,BillDetail.quantity, BillDetail.amount\n" +
+            "FROM BillDetail\n" +
+            "INNER JOIN Bill ON Bill.billId = BillDetail.billId\n" +
+            "INNER JOIN Service ON BillDetail.serviceId = Service.serviceId\n" +
+            "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
+            "WHERE Bill.issueDate =:date AND Room.roomNumber =:roomNumber")
+    List<ServicePOJO> getListServiceByIssueDateAndRoomNumber(String date, String roomNumber);
+
+    // VIẾT HÀM LẤY RA THÔNG TIN HÓA ĐƠN CỦA PHÒNG ĐÓ
+    @Query("SELECT *" +
+            "FROM Bill\n" +
+            "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
+            "INNER JOIN RoomType ON Room.roomTypeId = RoomType.roomTypeId\n" +
+            "INNER JOIN Tenant ON Bill.tenantId = Tenant.tenantId\n" +
+            "WHERE Bill.issueDate =:date AND Room.roomNumber =:roomNumber ")
+    Bill getBillByIssueDateAndRoomNumber(String date, String roomNumber);
 }

@@ -17,6 +17,9 @@
         android:theme="@style/Theme.QuanLyPhongTRo"
         tools:targetApi="31">
         <activity
+            android:name=".activity.UpdateBillActivity"
+            android:exported="false" />
+        <activity
             android:name=".activity.AddBillActivity"
             android:exported="false" />
         <activity
