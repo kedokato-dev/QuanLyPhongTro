@@ -1,10 +1,20 @@
 package com.example.quanlyphongtro.activity;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +34,7 @@ public class MenuFragment extends Fragment {
 
     private RecyclerView rcv_item;
     private ItemMenuAdapter itemMenuAdapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,15 +60,19 @@ public class MenuFragment extends Fragment {
         itemMenuAdapter.setOnItemClickListener(new ItemMenuAdapter.OnItemClickGetUserListListener() {
             @Override
             public void onItemClick(int position) {
-                if(position == 2){
+                if (position == 2) {
                     Intent intent = new Intent(getContext(), UserListActivity.class);
                     startActivity(intent);
-                }else if(position == 0){
+                } else if (position == 0) {
                     Intent intent = new Intent(getContext(), ImportDataActivity.class);
                     startActivity(intent);
-                }else if(position == 1){
+                } else if (position == 1) {
                     Intent intent = new Intent(getContext(), ExportDataActivity.class);
                     startActivity(intent);
+                } else if (position == 4) {
+                    openAboutDialog(Gravity.CENTER);
+                } else if (position == 3){
+                    Toast.makeText(getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -66,13 +81,65 @@ public class MenuFragment extends Fragment {
         return view;
     }
 
+
     private List<MenuItem> getListMenu() {
-            List<MenuItem> list = new ArrayList<>();
-            list.add(new MenuItem(R.drawable.ic_import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
-            list.add(new MenuItem(R.drawable.ic_export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
-            list.add(new MenuItem(R.drawable.ic_users, "Thành viên", "Quản lý thành viên trong khu trọ"));
-            list.add(new MenuItem(R.drawable.ic_dark, "Dark mode", "Chế độ tối của ứng dụng"));
-            return list;
+        List<MenuItem> list = new ArrayList<>();
+        list.add(new MenuItem(R.drawable.ic_import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
+        list.add(new MenuItem(R.drawable.ic_export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
+        list.add(new MenuItem(R.drawable.ic_users, "Thành viên", "Quản lý thành viên trong khu trọ"));
+        list.add(new MenuItem(R.drawable.ic_dark, "Dark mode", "Chế độ tối của ứng dụng"));
+        list.add(new MenuItem(R.drawable.circle_info_solid, "Giới thiệu về ứng dụng", "Quản lý phòng trọ"));
+        return list;
+    }
+
+    private Dialog createDialog(int layoutResId, int gravity) {
+        Dialog dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(layoutResId);
+
+        Window window = dialog.getWindow();
+        if (window == null) {
+            return null;
         }
 
+        window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT);
+        window.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        WindowManager.LayoutParams windowAttributes = window.getAttributes();
+        windowAttributes.gravity = gravity;
+        window.setAttributes(windowAttributes);
+
+        dialog.setCancelable(Gravity.CENTER == gravity);
+
+        return dialog;
     }
+
+    private void openAboutDialog(int gravity){
+        Dialog dialog = createDialog(R.layout.layout_dialog_about,gravity);
+        if (dialog == null){
+            return;
+        }
+
+
+        ImageView iv_close = dialog.findViewById(R.id.iv_close);
+        TextView tv_hdsdLink = dialog.findViewById(R.id.tv_hdsd_link);
+        dialog.show();
+
+        iv_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+        tv_hdsdLink.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.youtube.com/watch?v=eaHq3BCH2qU"));
+                startActivity(intent);
+            }
+        });
+
+
+    }
+
+}

@@ -10,6 +10,7 @@ import android.icu.text.NumberFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -96,6 +97,7 @@ public class UpdateBillActivity extends AppCompatActivity {
         loadToolBar();
 
 
+
         // lấy dữ liệu từ billFragment
         roomNumberValue = getIntent().getStringExtra("roomNumber");
         issueDateValue = getIntent().getStringExtra("issueDate");
@@ -122,13 +124,20 @@ public class UpdateBillActivity extends AppCompatActivity {
         rcvService.setLayoutManager(linearLayoutManager);
 
         // LẤY RA THÔNG TIN CỦA BILL
-        Bill bill = database.billDAO().getBillByIssueDateAndRoomNumber(issueDateValue, roomNumberValue);
+
+        String issueDateValueFormated = null;
+        try {
+            issueDateValueFormated = formatDate(issueDateValue);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        Bill bill = database.billDAO().getBillByIssueDateAndRoomNumber(issueDateValueFormated, roomNumberValue);
 
 
         Room room = database.roomDAO().getInfoRoomByRoomNumber(roomNumberValue);
         int defaultPositionRoomNumber = 0;
-        for(int i = 0; i < categoryAdapterRoomNumber.getCount(); i++){
-            if(categoryAdapterRoomNumber.getItem(i).getName().equals(room.getRoomNumber())){
+        for (int i = 0; i < categoryAdapterRoomNumber.getCount(); i++) {
+            if (categoryAdapterRoomNumber.getItem(i).getName().equals(room.getRoomNumber())) {
                 defaultPositionRoomNumber = i;
                 break;
             }
@@ -145,7 +154,7 @@ public class UpdateBillActivity extends AppCompatActivity {
                 tvRoomPrice.setText(convertDoubleToVND(list.get(0).getPrice()));
 
                 priceRoom = list.get(0).getPrice();
-                tvToalAmount.setText(convertDoubleToVND(list.get(0).getPrice()));
+                tvToalAmount.setText(convertDoubleToVND(calculateTotalAmount()));
 
             }
 
@@ -155,15 +164,14 @@ public class UpdateBillActivity extends AppCompatActivity {
             }
         });
         int dfPosFullName = 0;
-        Toast.makeText(this, bill.getTenantId(), Toast.LENGTH_SHORT).show();
-//        Tenant tenant = database.userDAO().getTenantByTenantID(bill.getTenantId());
-//        for(int i = 0; i < categoryAdapterRoomNumber.getCount(); i++){
-//            if(categoryAdapterMemberName.getItem(i).getName().equals(tenant.getFullName())){
-//                dfPosFullName = i;
-//                break;
-//            }
-//        }
-//        spnFullName.setSelection(dfPosFullName);
+        Tenant tenant = database.userDAO().getTenantByTenantID(bill.getTenantId());
+        for (int i = 0; i < categoryAdapterRoomNumber.getCount(); i++) {
+            if (categoryAdapterMemberName.getItem(i).getName().equals(tenant.getFullName())) {
+                dfPosFullName = i;
+                break;
+            }
+        }
+        spnFullName.setSelection(dfPosFullName);
 
         spnFullName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -176,6 +184,17 @@ public class UpdateBillActivity extends AppCompatActivity {
 
             }
         });
+
+
+        int dfPosStatus = 0;
+        for (int i = 0; i < categoryAdapterStatus.getCount(); i++) {
+            if (categoryAdapterStatus.getItem(i).getName().equals(bill.getStatus())) {
+                dfPosStatus = i;
+                break;
+            }
+        }
+        spnStatus.setSelection(dfPosStatus);
+
 
         spnStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -201,6 +220,7 @@ public class UpdateBillActivity extends AppCompatActivity {
             }
         });
 
+        edtInvoiceDate.setText(issueDateValue);
         edtInvoiceDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,7 +242,7 @@ public class UpdateBillActivity extends AppCompatActivity {
         btnAddBill.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addBill();
+                updateBill();
             }
         });
 
@@ -239,6 +259,15 @@ public class UpdateBillActivity extends AppCompatActivity {
                 deleteDialog(Gravity.CENTER, position);
             }
         });
+
+        list = loadServiceInBill();
+        loadData();
+        tvAmountService.setText(convertDoubleToVND(totalAmountServices()));
+        tvToalAmount.setText(convertDoubleToVND(loadTotalAmountRoom()));
+
+
+
+
     }
 
     private void loadToolBar() {
@@ -360,13 +389,11 @@ public class UpdateBillActivity extends AppCompatActivity {
     private List<ServiceInBillPOJO> getListService() {
         listServiceNameAndPrice = database.serviceDAO().getNameAndPriceService(serviceName);
         String serviceName = listServiceNameAndPrice.get(0).getServiceName();
-        int quantity = Integer.valueOf(String.valueOf(edtQuantityService.getText()));
+        int quantity = Integer.parseInt(String.valueOf(edtQuantityService.getText()));
         double priceService = listServiceNameAndPrice.get(0).getPricePerUnit();
         double amount = priceService * quantity;
 
         list.add(new ServiceInBillPOJO(serviceName, priceService, quantity, amount));
-
-
         return list;
     }
 
@@ -481,6 +508,8 @@ public class UpdateBillActivity extends AppCompatActivity {
             public void onClick(View view) {
                 list.remove(position);
                 loadData();
+                tvAmountService.setText(convertDoubleToVND(totalAmountServices()));
+                tvToalAmount.setText(convertDoubleToVND(loadTotalAmountRoom()));
                 dialog.dismiss();
             }
         });
@@ -504,66 +533,111 @@ public class UpdateBillActivity extends AppCompatActivity {
 
     }
 
-    private void addBill() {
+
+    private void updateBill() {
         Room room = database.roomDAO().getInfoRoomByRoomNumber(roomNumber);
         Tenant tenant = database.userDAO().getTenantByNameFullName(memberName);
 
-        String invoiceDate = edtInvoiceDate.getText().toString();
+        String issueDateFmt = "";
+        try {
+            issueDateFmt = formatDate(issueDateValue);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+
+        Bill bill = database.billDAO().getBillByIssueDateAndRoomNumber(issueDateFmt, roomNumberValue);
 
         // Kiểm tra dữ liệu đầu vào
         if (!TextUtils.isEmpty(edtInvoiceDate.getText()) && !list.isEmpty()) {
-            // Thêm hóa đơn và lấy billId của hóa đơn mới
-            int billId = 0;
-            try {
-                billId = (int) database.billDAO().insertBill(new Bill(
-                        room.getRoomId(),
-                        tenant.getTenantId(),
-                        formatDate(invoiceDate),
-                        123345,
-                        status
-                ));
-            } catch (ParseException e) {
-                throw new RuntimeException(e);
+            if (bill != null) {
+                // Cập nhật thông tin hóa đơn
+                bill.setRoomId(room.getRoomId());
+                bill.setTenantId(tenant.getTenantId());
+                try {
+                    String dateAfterEdit = formatDate(edtInvoiceDate.getText().toString());
+                    bill.setIssueDate(dateAfterEdit);
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                bill.setStatus(status);
+                bill.setTotalAmount(loadTotalAmountRoom());
+                database.billDAO().updateBill(bill); // Cập nhật hóa đơn
+            } else {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin trước khi cập nhật", Toast.LENGTH_SHORT).show();
+                return;
             }
 
-            // Thêm các chi tiết hóa đơn
+            // Lấy danh sách ID chi tiết hóa đơn hiện có
+            List<Integer> billDetailIDs = database.billDAO().listIDBillDetail(issueDateFmt, roomNumberValue);
+
+            // Danh sách các ID dịch vụ hiện tại trong hóa đơn
+            List<Integer> existingServiceIDs = new ArrayList<>();
+            for (int id : billDetailIDs) {
+                BillDetail bd = database.billDetailDAO().getBillDetailById(id);
+                if (bd != null) {
+                    existingServiceIDs.add(bd.getServiceId());
+                }
+            }
+
+            // Phân loại dịch vụ
             for (int i = 0; i < list.size(); i++) {
-                Service service = database.serviceDAO().getServiceByNameAndPrice(list.get(i).getServiceName(), list.get(i).getPricePerUnit());
-                database.billDetailDAO().insertBillDetail(new BillDetail(
-                        billId,                // Sử dụng billId từ bill vừa thêm
-                        service.getServiceId(),
-                        list.get(i).getQuantity(),
-                        list.get(i).getAmount()
-                ));
+                int serviceId = database.serviceDAO().getServiceIDByServiceName(list.get(i).getServiceName());
+
+                if (existingServiceIDs.contains(serviceId)) {
+                    // Cập nhật dịch vụ
+                    BillDetail updatedBillDetail = new BillDetail(
+                            billDetailIDs.get(existingServiceIDs.indexOf(serviceId)),
+                            bill.getBillId(),
+                            serviceId,
+                            list.get(i).getQuantity(),
+                            list.get(i).getAmount()
+                    );
+                    database.billDetailDAO().updateBillDetail(updatedBillDetail);
+                } else {
+                    // Thêm mới dịch vụ
+                    BillDetail newBillDetail = new BillDetail(
+                            0, // ID mới sẽ được auto-generate nếu để 0
+                            bill.getBillId(),
+                            serviceId,
+                            list.get(i).getQuantity(),
+                            list.get(i).getAmount()
+                    );
+                    database.billDetailDAO().insertBillDetail(newBillDetail);
+                }
             }
 
-            database.billDAO().updateTotalAmount();
-            Toast.makeText(this, "Thêm thành công", Toast.LENGTH_SHORT).show();
+            // Xóa dịch vụ không còn tồn tại trong danh sách
+            for (int id : billDetailIDs) {
+                BillDetail bd = database.billDetailDAO().getBillDetailById(id);
+                if (bd != null && !list.stream().anyMatch(item ->
+                        database.serviceDAO().getServiceIDByServiceName(item.getServiceName()) == bd.getServiceId())) {
+                    database.billDetailDAO().deleteBillDetail(bd);
+                }
+            }
+
+            // Hoàn tất
+            Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent();
             intent.putExtra("action", "oke");
             setResult(Activity.RESULT_OK, intent);
             finish();
         } else {
-            // Thông báo nếu dữ liệu chưa đầy đủ
             Toast.makeText(this, "Vui lòng chọn đủ thông tin trước khi thêm hóa đơn", Toast.LENGTH_SHORT).show();
         }
     }
 
-    // THỰC HIỆN TRUY VẤN LẤY DỮ LIỆU BILL TỪ DB
-    private Bill getBill() {
-        String issueDateFormated = null;
+
+    private List<ServiceInBillPOJO> loadServiceInBill() {
         try {
-            issueDateFormated = formatDate(issueDateValue);
+            String dateFormated = null;
+            dateFormated = formatDate(issueDateValue);
+            return database.billDAO().getServiceInBillByIssueDateAndRoomNumber(dateFormated, roomNumberValue);
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
-        return database.billDAO().getBillByIssueDateAndRoomNumber(issueDateFormated, roomNumberValue);
     }
 
-    private void loadDataBill() {
-
-
-
+    private double calculateTotalAmount() {
+        return priceRoom + totalAmountServices();
     }
 }

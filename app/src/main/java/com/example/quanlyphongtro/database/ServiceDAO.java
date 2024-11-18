@@ -63,4 +63,7 @@ public interface ServiceDAO {
             "GROUP BY ROOM.roomNumber, ROOM.price")
     double totalAmount(String roomNumber);
 
+    @Query("SELECT SERVICE.serviceId FROM SERVICE WHERE SERVICE.serviceName =:serviceName")
+    int getServiceIDByServiceName (String serviceName);
+
 }

@@ -334,7 +334,7 @@ public class AddBillActivity extends AppCompatActivity {
     private List<ServiceInBillPOJO> getListService() {
         listServiceNameAndPrice = database.serviceDAO().getNameAndPriceService(serviceName);
         String serviceName = listServiceNameAndPrice.get(0).getServiceName();
-        int quantity = Integer.valueOf(String.valueOf(edtQuantityService.getText()));
+        int quantity = Integer.parseInt(String.valueOf(edtQuantityService.getText()));
         double priceService = listServiceNameAndPrice.get(0).getPricePerUnit();
         double amount = priceService * quantity;
 
@@ -349,21 +349,27 @@ public class AddBillActivity extends AppCompatActivity {
         // Kiểm tra nếu người dùng đã nhập đủ thông tin
         if (!edtQuantityService.getText().toString().trim().isEmpty() && serviceName != null) {
             adapter.setData(getListService());
+
+            tvAmountService.setText(convertDoubleToVND(totalAmountServices()));
+            tvToalAmount.setText(convertDoubleToVND(loadTotalAmountRoom()));
+
         } else {
             Toast.makeText(this, "Vui lòng chọn đủ thông tin trước khi thêm !", Toast.LENGTH_SHORT).show();
             return;  // Dừng thực hiện nếu thông tin không đầy đủ
         }
 
         // Nếu danh sách đã có phần tử
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             if (!checkUniqueService()) {
                 rcvService.setAdapter(adapter);
             } else {
                 Toast.makeText(this, "Dịch vụ này đã được chọn cho phòng này rồi, bạn hãy chọn dịch vụ khác nhé !", Toast.LENGTH_SHORT).show();
 
                 // Kiểm tra trước khi xóa để tránh lỗi
-                if (list.size() > 0) {
+                if (!list.isEmpty()) {
                     list.remove(list.size() - 1);
+                    tvAmountService.setText(convertDoubleToVND(totalAmountServices()));
+                    tvToalAmount.setText(convertDoubleToVND(loadTotalAmountRoom()));
                 }
             }
         }
@@ -454,6 +460,9 @@ public class AddBillActivity extends AppCompatActivity {
             public void onClick(View view) {
                 list.remove(position);
                 loadData();
+
+                tvAmountService.setText(convertDoubleToVND(totalAmountServices()));
+                tvToalAmount.setText(convertDoubleToVND(loadTotalAmountRoom()));
                 dialog.dismiss();
             }
         });

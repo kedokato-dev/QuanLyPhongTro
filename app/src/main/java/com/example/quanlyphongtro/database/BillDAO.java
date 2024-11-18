@@ -4,11 +4,14 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Update;
 
 import com.example.quanlyphongtro.model.Bill;
 import com.example.quanlyphongtro.pojo.ItemBillPOJO;
+import com.example.quanlyphongtro.pojo.ServiceInBillPOJO;
 import com.example.quanlyphongtro.pojo.ServicePOJO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Dao
@@ -128,11 +131,37 @@ public interface BillDAO {
     List<ServicePOJO> getListServiceByIssueDateAndRoomNumber(String date, String roomNumber);
 
     // VIẾT HÀM LẤY RA THÔNG TIN HÓA ĐƠN CỦA PHÒNG ĐÓ
-    @Query("SELECT *" +
+    @Query("SELECT Bill.billId, Bill.roomId, Bill.tenantId, Bill.issueDate, Bill.totalAmount, Bill.status\n" +
             "FROM Bill\n" +
             "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
             "INNER JOIN RoomType ON Room.roomTypeId = RoomType.roomTypeId\n" +
             "INNER JOIN Tenant ON Bill.tenantId = Tenant.tenantId\n" +
             "WHERE Bill.issueDate =:date AND Room.roomNumber =:roomNumber ")
     Bill getBillByIssueDateAndRoomNumber(String date, String roomNumber);
+
+    // VIẾT HÀM LẤY RA THÔNG TIN DỊCH VỤ CỦA PHÒNG ĐÓ
+    @Query("SELECT Service.serviceName, Service.pricePerUnit, BillDetail.quantity, BillDetail.amount\n" +
+            "FROM BillDetail\n" +
+            "INNER JOIN Bill ON BillDetail.billId = Bill.billId\n" +
+            "INNER JOIN Room ON Bill.roomId = Room.roomId\n" +
+            "INNER JOIN Service ON BillDetail.serviceId = Service.serviceId\n" +
+            "WHERE Bill.issueDate =:date AND Room.roomNumber =:roomNumber")
+    List<ServiceInBillPOJO> getServiceInBillByIssueDateAndRoomNumber(String date, String roomNumber);
+
+    // VIẾT HÀM LẤY RA DANH SÁCH MÃ DỊCH VỤ CỦA HÓA ĐƠN ĐÓ RỒI CẬP NHẬT
+    @Query("SELECT BillDetail.billDetailId " +
+            "FROM Bill " +
+            "INNER JOIN Room ON Bill.roomId = Room.roomId " +
+            "INNER JOIN BillDetail ON Bill.billId = BillDetail.billId " +
+            "WHERE Bill.issueDate = :date AND Room.roomNumber = :roomNumber")
+    List<Integer> listIDBillDetail(String date, String roomNumber);
+
+
+
+
+    // VIẾT HÀM CẬP NHẬT THÔNG TIN CỦA HÓA ĐƠN
+    @Update
+    void updateBill(Bill bill);
+
+
 }

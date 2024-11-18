@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QuanLyPhongTRo</string>
+    <string name="app_name">Quản lý phòng trọ</string>
     <string name="action_search">Tìm kiếm</string>
     <string name="action_filter">Bộ lọc</string>
     <!-- TODO: Remove or change this placeholder text -->
