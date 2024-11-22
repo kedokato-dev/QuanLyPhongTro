@@ -156,12 +156,25 @@ public interface BillDAO {
             "WHERE Bill.issueDate = :date AND Room.roomNumber = :roomNumber")
     List<Integer> listIDBillDetail(String date, String roomNumber);
 
-
-
-
     // VIẾT HÀM CẬP NHẬT THÔNG TIN CỦA HÓA ĐƠN
     @Update
     void updateBill(Bill bill);
+
+    @Query("SELECT ROOM.roomNumber, \n" +
+            "       strftime('%d/%m/%Y', BILL.issueDate) AS issueDate, \n" +
+            "       SUM(BillDetail.amount) + ROOM.price AS totalAmount,  \n" +
+            "       BILL.status\n" +
+            "FROM Room\n" +
+            "INNER JOIN BILL ON ROOM.roomId = BILL.roomId\n" +
+            "INNER JOIN BillDetail ON BILL.billId = BillDetail.billId\n" +
+            "INNER JOIN Service ON BillDetail.serviceId = Service.serviceId\n" +
+            "WHERE strftime('%Y-%m', issueDate) = :monthYear \n" +
+            "GROUP BY ROOM.roomNumber, ROOM.price, BILL.billId")
+    List<ItemBillPOJO> getBillsByMonth(String monthYear);
+
+    @Query("SELECT SUM(totalAmount) FROM Bill WHERE strftime('%Y-%m', issueDate) = :monthYear")
+    Double getTotalRevenueByMonth(String monthYear);
+
 
 
 }

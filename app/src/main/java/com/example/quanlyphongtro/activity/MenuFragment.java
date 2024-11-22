@@ -74,6 +74,9 @@ public class MenuFragment extends Fragment {
                 } else if (position == 3){
                     Intent intent = new Intent(getContext(), AddTenantToRoomActivity.class);
                     startActivity(intent);
+                } else if(position == 5){
+                    Intent intent = new Intent(getContext(), StatisticsActivity.class);
+                    startActivity(intent);
                 }
 
             }
