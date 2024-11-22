@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
@@ -70,4 +71,11 @@ public class Room {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return roomNumber; // Hoặc trả về kiểu hiển thị mong muốn
+    }
+
 }

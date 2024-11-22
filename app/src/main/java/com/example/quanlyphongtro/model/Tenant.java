@@ -1,5 +1,6 @@
 package com.example.quanlyphongtro.model;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -71,4 +72,11 @@ public class Tenant {
     public void setIdentityCard(String identityCard) {
         this.identityCard = identityCard;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return fullName; // Hoặc trả về kiểu hiển thị mong muốn
+    }
+
 }

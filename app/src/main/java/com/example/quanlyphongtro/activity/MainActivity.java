@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.MaterialShapeDrawable;
 
+
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private FrameLayout frameLayout;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         bottomNavigationView = findViewById(R.id.bottomNavView);
         frameLayout = findViewById(R.id.frameLayout);
@@ -79,4 +81,6 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed(); // Nếu không còn fragment nào trong back stack, thoát ứng dụng
         }
     }
+
+
 }

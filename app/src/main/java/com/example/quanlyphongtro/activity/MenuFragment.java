@@ -72,7 +72,8 @@ public class MenuFragment extends Fragment {
                 } else if (position == 4) {
                     openAboutDialog(Gravity.CENTER);
                 } else if (position == 3){
-                    Toast.makeText(getContext(), "Coming Soon", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getContext(), AddTenantToRoomActivity.class);
+                    startActivity(intent);
                 }
 
             }
@@ -87,8 +88,9 @@ public class MenuFragment extends Fragment {
         list.add(new MenuItem(R.drawable.ic_import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
         list.add(new MenuItem(R.drawable.ic_export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
         list.add(new MenuItem(R.drawable.ic_users, "Thành viên", "Quản lý thành viên trong khu trọ"));
-        list.add(new MenuItem(R.drawable.ic_dark, "Dark mode", "Chế độ tối của ứng dụng"));
+        list.add(new MenuItem(R.drawable.user_plus_solid, "Thêm thành viên vào phòng", "Thêm thành viên đã có vào phòng trọ"));
         list.add(new MenuItem(R.drawable.circle_info_solid, "Giới thiệu về ứng dụng", "Quản lý phòng trọ"));
+        list.add(new MenuItem(R.drawable.chart_simple_solid, "Thống kê doanh thu", "Xem doanh thu theo tháng"));
         return list;
     }
 

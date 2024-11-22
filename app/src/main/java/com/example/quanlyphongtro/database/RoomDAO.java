@@ -58,5 +58,15 @@ public interface RoomDAO {
             "WHERE ROOM.roomNumber = :roomNumber")
     List<RoomNumber_RoomTypeName> getRoomNumber_RoomTypeName(String roomNumber);
 
+    @Query("UPDATE Room\n" +
+            "SET status =:status \n" +
+            "WHERE Room.roomId =:roomId")
+    void updateStatusRoom(String status, int roomId);
+
+
+
+
+
+
 
 }

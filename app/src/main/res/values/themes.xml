@@ -32,7 +32,4 @@
         <item name="android:textColor">@color/white</item> <!-- Màu text -->
         <item name="android:iconTint" tools:targetApi="o">@color/white</item> <!-- Màu icon -->
     </style>
-
-
-
 </resources>

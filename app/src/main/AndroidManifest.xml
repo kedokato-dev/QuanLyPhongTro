@@ -10,12 +10,18 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/icons8_hotel_64"
+        android:icon="@drawable/house_svgrepo_com"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/icons8_hotel_64"
+        android:roundIcon="@drawable/house_svgrepo_com"
         android:supportsRtl="true"
         android:theme="@style/Theme.QuanLyPhongTRo"
         tools:targetApi="31">
+        <activity
+            android:name=".activity.AddTenantToRoomActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.AddTenantToRoom"
+            android:exported="false" />
         <activity
             android:name=".activity.UpdateBillActivity"
             android:exported="false" />
@@ -41,7 +47,7 @@
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:theme="@style/Theme.QuanLyPhongTRo">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
