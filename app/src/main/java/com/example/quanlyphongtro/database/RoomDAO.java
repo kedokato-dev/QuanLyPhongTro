@@ -44,6 +44,24 @@ public interface RoomDAO {
     @Query("SELECT * FROM ROOM")
     List<Room> getAllRoom();
 
+    @Query("SELECT * FROM Room\n" +
+            "WHERE Room.roomId NOT IN \n" +
+            "(\n" +
+            "  SELECT Room.roomId\n" +
+            "  FROM Room\n" +
+            "  WHERE Room.status = 'Còn trống'\n" +
+            ")")
+    List<Room> getNonEmptyRooms();
+
+    @Query("SELECT * FROM Room\n" +
+            "WHERE Room.roomId NOT IN \n" +
+            "(\n" +
+            "  SELECT Room.roomId\n" +
+            "  FROM Room\n" +
+            "  WHERE Room.status = 'Đã đủ người'\n" +
+            ")")
+    List<Room> getAvailableRooms();
+
     @Query("SELECT Tenant.fullName, Tenant.phone\n" +
             "FROM Tenant \n" +
             "INNER JOIN Room_Tenant ON Tenant.tenantId = Room_Tenant.tenantId \n" +

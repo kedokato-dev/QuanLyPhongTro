@@ -97,7 +97,7 @@ public class AddTenantToRoomActivity extends AppCompatActivity {
 
     private void loadRooms() {
         database = QuanLyPhongTroDB.getInstance(this);
-        List<Room> rooms = database.roomDAO().getAllRoom();
+        List<Room> rooms = database.roomDAO().getAvailableRooms();
 
         ArrayAdapter<Room> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, rooms);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -144,7 +144,7 @@ public class AddTenantToRoomActivity extends AppCompatActivity {
         int roomCapacity = roomTenantDAO.getRoomMaxOccupants(roomId);
 
         if(currentTenantCount == 0 ){
-            database.roomDAO().updateStatusRoom("Chưa có người thuê", roomId);
+            database.roomDAO().updateStatusRoom("Còn trống", roomId);
         }else if (currentTenantCount > 0 && currentTenantCount < roomCapacity){
             database.roomDAO().updateStatusRoom("Đã có người thuê", roomId);
         } else {

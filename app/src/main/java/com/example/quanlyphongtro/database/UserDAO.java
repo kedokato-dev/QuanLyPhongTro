@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import com.example.quanlyphongtro.model.Category;
 import com.example.quanlyphongtro.model.Tenant;
 import com.example.quanlyphongtro.pojo.UserPOJO;
 
@@ -17,6 +18,11 @@ public interface UserDAO
     @Query("SELECT fullName, phone, email, identityCard\n" +
             "FROM Tenant")
     List<UserPOJO> getListUser();
+
+    @Query("SELECT fullName, phone, Email, identityCard FROM Room_Tenant\n" +
+            "INNER JOIN Tenant ON Room_Tenant.tenantId = Tenant.tenantId\n" +
+            "WHERE Room_Tenant.roomId =:roomId \n")
+    List<UserPOJO> getRoomMembers(int roomId);
 
 
     @Query("SELECT * FROM TENANT")

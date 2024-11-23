@@ -11,6 +11,7 @@ import android.icu.text.NumberFormat;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -55,6 +56,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 
 public class AddBillActivity extends AppCompatActivity {
     private Spinner spnRoomNumber, spnFullName, spnStatus, spnService;
@@ -116,7 +118,7 @@ public class AddBillActivity extends AppCompatActivity {
 
         rcvService.setLayoutManager(linearLayoutManager);
 
-
+        spnRoomNumber.setSelection(0);
         spnRoomNumber.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -262,7 +264,7 @@ public class AddBillActivity extends AppCompatActivity {
     }
 
     private List<Category> getListRoomNumber() {
-        roomList = database.roomDAO().getAllRoom();
+        roomList = database.roomDAO().getNonEmptyRooms();
         List<Category> list = new ArrayList<>();
 
         if (roomList != null) {
@@ -275,12 +277,19 @@ public class AddBillActivity extends AppCompatActivity {
 
     private List<Category> getListMemberName() {
         List<Category> categoryList = new ArrayList<>();
-        memberList = database.userDAO().getListUser();
+        try {
+            Room room = database.roomDAO().getInfoRoomByRoomNumber(roomNumber);
+            List<UserPOJO> listMember = database.userDAO().getRoomMembers(room.getRoomId());
 
-        if (memberList != null) {
-            for (int i = 0; i < memberList.size(); i++) {
-                categoryList.add(new Category(memberList.get(i).getFullName()));
+            if (listMember != null) {
+               for(int i = 0; i < listMember.size(); i++){
+                   categoryList.add(new Category(listMember.get(i).getFullName()));
+               }
+            } else {
+                categoryList.add(new Category("Trống"));
             }
+        } catch (Exception exception) {
+            Log.d("room_list", Objects.requireNonNull(exception.getMessage()));
         }
         return categoryList;
     }
@@ -385,7 +394,8 @@ public class AddBillActivity extends AppCompatActivity {
         if (!list.isEmpty()) {
             for (int i = 0; i < list.size(); i++) {
                 for (int j = i + 1; j < list.size(); j++) {
-                    if (list.get(i).getServiceName().equals(list.get(j).getServiceName())) return true;
+                    if (list.get(i).getServiceName().equals(list.get(j).getServiceName()))
+                        return true;
                 }
             }
         }
@@ -482,7 +492,7 @@ public class AddBillActivity extends AppCompatActivity {
         SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         Date date = inputFormat.parse(input);
-        return  dateAfterFormated = outputFormat.format(date);
+        return dateAfterFormated = outputFormat.format(date);
 
     }
 
