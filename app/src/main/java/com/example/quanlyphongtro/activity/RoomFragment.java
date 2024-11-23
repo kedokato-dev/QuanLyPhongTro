@@ -212,7 +212,7 @@ public class RoomFragment extends Fragment {
                         String roomTypeSelected = spinner.getSelectedItem().toString();
                         int idType = database.roomTypeDAO().SelectIdRoomTypeByRoomType(roomTypeSelected);
 
-                        Room room = new Room(strRoomNumber, idType, "Chưa có người thuê", dRoomPrice);
+                        Room room = new Room(strRoomNumber, idType, "Còn trống", dRoomPrice);
                         database.roomDAO().insertRoom(room);
 
                         Toast.makeText(getContext(), "Thêm phòng " + strRoomNumber + " thành công", Toast.LENGTH_SHORT).show();

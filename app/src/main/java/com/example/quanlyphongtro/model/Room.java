@@ -3,6 +3,7 @@ package com.example.quanlyphongtro.model;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity(tableName = "Room",foreignKeys = @ForeignKey(entity = RoomType.class, parentColumns = "roomTypeId", childColumns = "roomTypeId"))
@@ -14,6 +15,7 @@ public class Room {
     private String status;
     private double price;
 
+
     public Room(int roomId, String roomNumber, int roomTypeId, String status, double price) {
         this.roomId = roomId;
         this.roomNumber = roomNumber;
@@ -21,7 +23,7 @@ public class Room {
         this.status = status;
         this.price = price;
     }
-
+    @Ignore
     public Room( String roomNumber, int roomTypeId, String status, double price) {
         this.roomNumber = roomNumber;
         this.roomTypeId = roomTypeId;

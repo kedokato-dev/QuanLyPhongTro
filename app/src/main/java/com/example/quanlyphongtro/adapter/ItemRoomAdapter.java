@@ -87,7 +87,7 @@ public class ItemRoomAdapter extends RecyclerView.Adapter<ItemRoomAdapter.ItemRo
 
         if ("Đã đủ người".equals(room.getStatus())) {
             holder.roomStatus.setTextColor(context.getResources().getColor(R.color.red));
-        } else if("Đã có người thuê".equals(room.getStatus())) {
+        } else if("Còn slot".equals(room.getStatus())) {
             holder.roomStatus.setTextColor(context.getResources().getColor(R.color.orange));
         }else{
             holder.roomStatus.setTextColor(context.getResources().getColor(R.color.green));

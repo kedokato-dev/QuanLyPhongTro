@@ -146,7 +146,7 @@ public class AddTenantToRoomActivity extends AppCompatActivity {
         if(currentTenantCount == 0 ){
             database.roomDAO().updateStatusRoom("Còn trống", roomId);
         }else if (currentTenantCount > 0 && currentTenantCount < roomCapacity){
-            database.roomDAO().updateStatusRoom("Đã có người thuê", roomId);
+            database.roomDAO().updateStatusRoom("Còn slot", roomId);
         } else {
             database.roomDAO().updateStatusRoom("Đã đủ người", roomId);
         }

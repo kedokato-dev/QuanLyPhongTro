@@ -108,7 +108,7 @@ public class UpdateBillActivity extends AppCompatActivity {
         CategoryAdapter categoryAdapterRoomNumber = new CategoryAdapter(this, R.layout.item_selected, getListRoomNumber());
         CategoryAdapter categoryAdapterStatus = new CategoryAdapter(this, R.layout.item_selected, getListStatus());
         CategoryAdapter categoryAdapterService = new CategoryAdapter(this, R.layout.item_selected, getListServiceName());
-        CategoryAdapter categoryAdapterMemberName = new CategoryAdapter(this, R.layout.item_selected, getListMemberName());
+        CategoryAdapter categoryAdapterMemberName = new CategoryAdapter(this, R.layout.item_selected, getListMemberName(roomNumberValue));
 
         spnRoomNumber.setAdapter(categoryAdapterRoomNumber);
         spnFullName.setAdapter(categoryAdapterMemberName);
@@ -150,11 +150,18 @@ public class UpdateBillActivity extends AppCompatActivity {
 
                 roomNumber = categoryAdapterRoomNumber.getItem(i).getName();
 
-                List<RoomNumber_RoomTypeName> list = database.roomDAO().getRoomNumber_RoomTypeName(roomNumber);
-                tvRoomPrice.setText(convertDoubleToVND(list.get(0).getPrice()));
+                // Cập nhật thông tin giá phòng
+                List<RoomNumber_RoomTypeName> roomInfo = database.roomDAO().getRoomNumber_RoomTypeName(roomNumber);
+                if (roomInfo != null && !roomInfo.isEmpty()) {
+                    tvRoomPrice.setText(convertDoubleToVND(roomInfo.get(0).getPrice()));
+                    priceRoom = roomInfo.get(0).getPrice();
+                    tvToalAmount.setText(convertDoubleToVND(priceRoom));
+                }
 
-                priceRoom = list.get(0).getPrice();
-                tvToalAmount.setText(convertDoubleToVND(calculateTotalAmount()));
+                // Cập nhật danh sách thành viên
+                List<Category> memberCategoryList = getListMemberName(roomNumber);
+                CategoryAdapter categoryAdapterMemberName = new CategoryAdapter(UpdateBillActivity.this, R.layout.item_selected, memberCategoryList);
+                spnFullName.setAdapter(categoryAdapterMemberName);
 
             }
 
@@ -166,17 +173,25 @@ public class UpdateBillActivity extends AppCompatActivity {
         int dfPosFullName = 0;
         Tenant tenant = database.userDAO().getTenantByTenantID(bill.getTenantId());
         for (int i = 0; i < categoryAdapterRoomNumber.getCount(); i++) {
-            if (categoryAdapterMemberName.getItem(i).getName().equals(tenant.getFullName())) {
-                dfPosFullName = i;
-                break;
-            }
+           try {
+               if (categoryAdapterMemberName.getItem(i).getName().equals(tenant.getFullName())) {
+                   dfPosFullName = i;
+                   break;
+               }
+           }catch (Exception e){
+
+           }
         }
         spnFullName.setSelection(dfPosFullName);
 
         spnFullName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                memberName = categoryAdapterMemberName.getItem(i).getName();
+                try {
+                    memberName = categoryAdapterMemberName.getItem(i).getName();
+                }catch (Exception ex){
+
+                }
             }
 
             @Override
@@ -317,7 +332,7 @@ public class UpdateBillActivity extends AppCompatActivity {
     }
 
     private List<Category> getListRoomNumber() {
-        roomList = database.roomDAO().getAllRoom();
+        roomList = database.roomDAO().getNonEmptyRooms();
         List<Category> list = new ArrayList<>();
 
         if (roomList != null) {
@@ -328,15 +343,31 @@ public class UpdateBillActivity extends AppCompatActivity {
         return list;
     }
 
-    private List<Category> getListMemberName() {
+    private List<Category> getListMemberName(String roomNumber) {
         List<Category> categoryList = new ArrayList<>();
-        memberList = database.userDAO().getListUser();
-
-        if (memberList != null) {
-            for (int i = 0; i < memberList.size(); i++) {
-                categoryList.add(new Category(memberList.get(i).getFullName()));
-            }
+        if (TextUtils.isEmpty(roomNumber)) {
+            return categoryList; //
         }
+
+        try {
+            Room room = database.roomDAO().getInfoRoomByRoomNumber(roomNumber);
+            if (room != null) {
+                List<UserPOJO> listMember = database.userDAO().getRoomMembers(room.getRoomId());
+                if (listMember != null && !listMember.isEmpty()) {
+                    for (UserPOJO member : listMember) {
+                        categoryList.add(new Category(member.getFullName()));
+                    }
+                } else {
+                    categoryList.add(new Category("Trống"));
+                }
+            } else {
+                Toast.makeText(this, "Không tìm thấy phòng", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception exception) {
+            Toast.makeText(this, "Lỗi khi lấy danh sách thành viên", Toast.LENGTH_SHORT).show();
+            Log.d("getListMemberName", "getListMemberName: " + exception.getMessage());
+        }
+
         return categoryList;
     }
 
