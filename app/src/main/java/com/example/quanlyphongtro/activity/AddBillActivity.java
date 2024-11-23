@@ -56,7 +56,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Objects;
 
 public class AddBillActivity extends AppCompatActivity {
     private Spinner spnRoomNumber, spnFullName, spnStatus, spnService;
@@ -71,7 +70,7 @@ public class AddBillActivity extends AppCompatActivity {
     private EditText edtInvoiceDate, edtQuantityService;
     private TextView tvAmountService, tvRoomPrice, tvToalAmount;
 
-    private String roomNumber, memberName, dateInvoice, status, serviceName;
+    private String roomNumber, memberName, dateInvoice, status, serviceName, name;
 
     private ItemServiceAddBillAdapter adapter;
 
@@ -105,10 +104,11 @@ public class AddBillActivity extends AppCompatActivity {
         CategoryAdapter categoryAdapterRoomNumber = new CategoryAdapter(this, R.layout.item_selected, getListRoomNumber());
         CategoryAdapter categoryAdapterStatus = new CategoryAdapter(this, R.layout.item_selected, getListStatus());
         CategoryAdapter categoryAdapterService = new CategoryAdapter(this, R.layout.item_selected, getListServiceName());
-        CategoryAdapter categoryAdapterMemberName = new CategoryAdapter(this, R.layout.item_selected, getListMemberName(roomNumber));
+        final CategoryAdapter[] categoryAdapterMemberName = new CategoryAdapter[1];
+//         = new CategoryAdapter(this, R.layout.item_selected, getListMemberName(roomNumber));
 
         spnRoomNumber.setAdapter(categoryAdapterRoomNumber);
-        spnFullName.setAdapter(categoryAdapterMemberName);
+//        spnFullName.setAdapter(categoryAdapterMemberName);
         spnStatus.setAdapter(categoryAdapterStatus);
         spnService.setAdapter(categoryAdapterService);
 
@@ -136,8 +136,8 @@ public class AddBillActivity extends AppCompatActivity {
 
                 // Cập nhật danh sách thành viên
                 List<Category> memberCategoryList = getListMemberName(roomNumber);
-                CategoryAdapter categoryAdapterMemberName = new CategoryAdapter(AddBillActivity.this, R.layout.item_selected, memberCategoryList);
-                spnFullName.setAdapter(categoryAdapterMemberName);
+                 categoryAdapterMemberName[0] = new CategoryAdapter(AddBillActivity.this, R.layout.item_selected, memberCategoryList);
+                spnFullName.setAdapter(categoryAdapterMemberName[0]);
             }
 
             @Override
@@ -153,7 +153,8 @@ public class AddBillActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                try {
-                   memberName = categoryAdapterMemberName.getItem(i).getName();
+                   memberName = categoryAdapterMemberName[0].getItem(i).getName();
+
                }catch (Exception ex){
 
                 }
