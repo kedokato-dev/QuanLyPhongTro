@@ -99,7 +99,7 @@ public class MenuFragment extends Fragment {
         list.add(new MenuItem(R.drawable.ic_import_file, "Nhập dữ liệu", "Nhập dữ liệu từ file csv"));
         list.add(new MenuItem(R.drawable.ic_export_flie, "Xuất dữ liệu", "Xuất dữ liệu ra file csv"));
         list.add(new MenuItem(R.drawable.ic_users, "Thành viên", "Quản lý thành viên trong khu trọ"));
-        list.add(new MenuItem(R.drawable.user_plus_solid, "Thêm thành viên vào phòng", "Thêm thành viên đã có vào phòng trọ"));
+        list.add(new MenuItem(R.drawable.people_arrows_solid, "Điều chỉnh thành viên phòng", "Thêm, gỡ thành viên ra khỏi phòng"));
         list.add(new MenuItem(R.drawable.circle_info_solid, "Giới thiệu về ứng dụng", "Quản lý phòng trọ"));
         list.add(new MenuItem(R.drawable.chart_simple_solid, "Thống kê doanh thu", "Xem doanh thu theo tháng"));
         return list;
