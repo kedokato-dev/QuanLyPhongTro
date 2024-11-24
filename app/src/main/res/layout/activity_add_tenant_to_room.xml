@@ -24,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Thêm thành viên vào phòng trọ"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -32,53 +32,18 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- Spinner chọn phòng -->
-    <LinearLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:layout_height="wrap_content"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Chọn phòng"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <Spinner
-            android:id="@+id/spinnerRooms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Spinner chọn người thuê -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Chọn người thuê"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <Spinner
-            android:id="@+id/spinnerTenants"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
-        <!-- Nút thêm -->
-        <Button
-            android:textSize="18sp"
-            android:textAllCaps="false"
-            android:id="@+id/btnAddTenantToRoom"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_color_blue_outline_gray"
-            android:text="Thêm vào phòng"
-            android:textColor="@android:color/white" />
-    </LinearLayout>
+
+
 
 </LinearLayout>

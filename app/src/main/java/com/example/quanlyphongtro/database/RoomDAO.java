@@ -81,6 +81,11 @@ public interface RoomDAO {
             "WHERE Room.roomId =:roomId")
     void updateStatusRoom(String status, int roomId);
 
+    @Query("SELECT r.roomId \n" +
+            "FROM Room r \n" +
+            "WHERE r.roomNumber =:roomNumber")
+    int getIDRoom(String roomNumber);
+
 
 
 

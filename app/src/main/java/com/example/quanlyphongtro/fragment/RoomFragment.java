@@ -1,4 +1,4 @@
-package com.example.quanlyphongtro.activity;
+package com.example.quanlyphongtro.fragment;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyphongtro.R;
+import com.example.quanlyphongtro.activity.DetailRoomActivity;
 import com.example.quanlyphongtro.adapter.ItemRoomAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
 import com.example.quanlyphongtro.model.Room;

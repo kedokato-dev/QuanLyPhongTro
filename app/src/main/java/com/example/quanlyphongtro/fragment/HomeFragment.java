@@ -1,4 +1,4 @@
-package com.example.quanlyphongtro.activity;
+package com.example.quanlyphongtro.fragment;
 
 import android.app.Dialog;
 import android.graphics.Color;

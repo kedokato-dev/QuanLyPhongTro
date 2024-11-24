@@ -11,6 +11,10 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.quanlyphongtro.R;
+import com.example.quanlyphongtro.fragment.BillFragment;
+import com.example.quanlyphongtro.fragment.HomeFragment;
+import com.example.quanlyphongtro.fragment.MenuFragment;
+import com.example.quanlyphongtro.fragment.RoomFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.shape.CornerFamily;
 import com.google.android.material.shape.MaterialShapeDrawable;

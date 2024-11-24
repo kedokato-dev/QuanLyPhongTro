@@ -1,4 +1,4 @@
-package com.example.quanlyphongtro.activity;
+package com.example.quanlyphongtro.fragment;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -34,6 +34,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.quanlyphongtro.R;
+import com.example.quanlyphongtro.activity.AddBillActivity;
+import com.example.quanlyphongtro.activity.DetailBillActivity;
+import com.example.quanlyphongtro.activity.UpdateBillActivity;
 import com.example.quanlyphongtro.adapter.ItemBillAdapter;
 import com.example.quanlyphongtro.database.QuanLyPhongTroDB;
 import com.example.quanlyphongtro.pojo.ItemBillPOJO;

@@ -1,5 +1,6 @@
-package com.example.quanlyphongtro.activity;
+package com.example.quanlyphongtro.fragment;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,7 +15,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -22,9 +22,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.quanlyphongtro.pojo.MenuItem;
 import com.example.quanlyphongtro.R;
+import com.example.quanlyphongtro.activity.AddTenantToRoomActivity;
+import com.example.quanlyphongtro.activity.ExportDataActivity;
+import com.example.quanlyphongtro.activity.ImportDataActivity;
+import com.example.quanlyphongtro.activity.StatisticsActivity;
+import com.example.quanlyphongtro.activity.UserListActivity;
 import com.example.quanlyphongtro.adapter.ItemMenuAdapter;
+import com.example.quanlyphongtro.pojo.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +77,11 @@ public class MenuFragment extends Fragment {
                 } else if (position == 4) {
                     openAboutDialog(Gravity.CENTER);
                 } else if (position == 3){
-                    Intent intent = new Intent(getContext(), AddTenantToRoomActivity.class);
-                    startActivity(intent);
+//                    Intent intent = new Intent(getContext(), AddTenantToRoomActivity.class);
+//                    startActivity(intent);
+                    Intent intent = new Intent(getActivity(), AddTenantToRoomActivity.class);
+                    startActivityForResult(intent, 1);
+
                 } else if(position == 5){
                     Intent intent = new Intent(getContext(), StatisticsActivity.class);
                     startActivity(intent);
@@ -143,8 +151,17 @@ public class MenuFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            String result = data.getStringExtra("result_key");
+            // Xử lý kết quả
+        }
+    }
+
 
 }
